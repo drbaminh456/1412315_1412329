@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', (req, res) => {
   var vm = {
-    layout: 'home.handlebars'
+    layout: 'main.handlebars'
   };
   res.render('home/index', vm);
 });
