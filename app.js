@@ -22,8 +22,8 @@ app.engine('hbs', exphbs({
   }
 }));
 
-app.set('view engine', '.hbs');
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.set('view engine', 'hbs');
+app.use(express.static(path.resolve(__dirname, 'views')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', (req, res) => {
   res.redirect('/home');
+  // res.render('home');
 });
 
 app.use('/home', homeController);

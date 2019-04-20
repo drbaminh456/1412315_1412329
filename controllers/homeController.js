@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('abcxyz')
+router.get('/', (req, res) => {
+  var vm = {
+    layout: 'home.handlebars'
+  };
+  res.render('home/index', vm);
 });
 
 module.exports = router;
