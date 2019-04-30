@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', (req, res) => {
   var vm = {
-    layout: 'noleftmenu.handlebars'
+    layout: 'main.handlebars'
   };
   res.render('log/login', vm);
 });
