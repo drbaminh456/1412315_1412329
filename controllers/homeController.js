@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   var vm = {
     layout: 'main.handlebars'
   };
-  res.render('home/index', vm);
+  res.render('home/home', vm);
 });
 
 module.exports = router;
