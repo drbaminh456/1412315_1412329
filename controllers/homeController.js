@@ -9,4 +9,12 @@ router.get('/', (req, res) => {
   res.render('home/home', vm);
 });
 
+/* GET single page. */
+router.get('/page', (req, res) => {
+  var vm = {
+    layout: 'page.handlebars'
+  };
+  res.render('home/home', vm);
+});
+
 module.exports = router;
