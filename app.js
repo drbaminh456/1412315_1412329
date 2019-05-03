@@ -8,6 +8,7 @@ var wnumb = require('wnumb');
 var app = express();
 var homeController = require('./controllers/homeController');
 var loginController = require('./controllers/loginController');
+var registController = require('./controllers/registController');
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
   layoutsDir: 'views/_layouts/',
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 //   res.render('/home');
 // });
 
+app.use('/regist',registController);
 app.use('/page', homeController);
 app.use('/home', homeController);
 app.use('/login', loginController);
