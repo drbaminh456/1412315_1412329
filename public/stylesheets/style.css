@@ -1201,7 +1201,7 @@ textarea:focus ~ .highlight {
 /* Footer Area CSS */
 .footer-area {
   background-color: #161616;
-  padding: 70px 0;
+  padding: 50px 0;
   position: relative;
   z-index: 1; }
   .footer-area .footer-single-widget .copywrite-text p {
