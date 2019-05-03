@@ -35,11 +35,11 @@ app.get('/', (req, res) => {
   // res.render('home');
 });
 
-app.get('/page', (req, res) => {
-  res.render('/home');
-});
+// app.get('/page', (req, res) => {
+//   res.render('/home');
+// });
 
-
+app.use('/page', homeController);
 app.use('/home', homeController);
 app.use('/login', loginController);
 app.listen(3000, () => { });
