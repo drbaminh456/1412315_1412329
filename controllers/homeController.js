@@ -14,7 +14,7 @@ router.get('/page', (req, res) => {
   var vm = {
     layout: 'page.handlebars'
   };
-  res.render('home/home', vm);
+  res.render('page/page', vm);
 });
 
 module.exports = router;

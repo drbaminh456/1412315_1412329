@@ -3,9 +3,9 @@ var router = express.Router();
 
 router.get('/', (req, res) => {
   var vm = {
-    layout: 'regist.handlebars'
+    layout: 'log.handlebars'
   };
-  res.render('log/login', vm);
+  res.render('regist/regist', vm);
 });
 
 module.exports = router;
