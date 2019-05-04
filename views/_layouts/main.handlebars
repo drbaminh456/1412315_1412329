@@ -23,12 +23,21 @@
                                 class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="worldNav">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="account/login">Login</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">My profile</a>
+                                        <a class="dropdown-item" href="account/login">Sign in</a>
+                                        <a class="dropdown-item" href="account/register">Register</a>
+                                        <a class="dropdown-item" href="regular-page.html">Sign up</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="#" style="font-size: smaller">Forget password</a>
+                                </li>
+                                {{!-- <li class="nav-item">
                                     <a class="nav-link" href="account/register">Register</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </nav>
@@ -120,41 +129,36 @@
                                         role="tab" aria-controls="world-tab-1" aria-selected="true">All</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab"
-                                        aria-controls="world-tab-2" aria-selected="false">Style hunter</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab3" data-toggle="tab" href="#world-tab-3" role="tab"
-                                        aria-controls="world-tab-3" aria-selected="false">Vogue</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab4" data-toggle="tab" href="#world-tab-4" role="tab"
-                                        aria-controls="world-tab-4" aria-selected="false">Health &amp; Fitness</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab5" data-toggle="tab" href="#world-tab-5" role="tab"
-                                        aria-controls="world-tab-5" aria-selected="false">Travel</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab6" data-toggle="tab" href="#world-tab-6" role="tab"
-                                        aria-controls="world-tab-6" aria-selected="false">Gadgets</a>
-                                </li>
-
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                        aria-haspopup="true" aria-expanded="false">More</a>
+                                        aria-haspopup="true" aria-expanded="false">Kinh doanh</a>
                                     <div class="dropdown-menu">
                                         <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab"
-                                            aria-controls="world-tab-7" aria-selected="false">Sports</a>
+                                            aria-controls="world-tab-7" aria-selected="false">Nông sản</a>
                                         <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab"
-                                            aria-controls="world-tab-8" aria-selected="false">Politices</a>
-                                        <a class="nav-link" id="tab9" data-toggle="tab" href="#world-tab-9" role="tab"
-                                            aria-controls="world-tab-9" aria-selected="false">Features</a>
+                                            aria-controls="world-tab-8" aria-selected="false">Hải sản</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">Tài chính - Ngân hàng</a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab"
+                                            aria-controls="world-tab-7" aria-selected="false">Chứng khoán</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab"
+                                            aria-controls="world-tab-8" aria-selected="false">Bảo hiểm</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Văn hóa - Xã hội</a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab" aria-controls="world-tab-7"
+                                            aria-selected="false">Văn hóa</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab" aria-controls="world-tab-8"
+                                            aria-selected="false">Xã hội</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab" aria-controls="world-tab-8"
+                                            aria-selected="false">Đời sống</a>
                                     </div>
                                 </li>
                             </ul>
