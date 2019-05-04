@@ -7,7 +7,7 @@ var wnumb = require('wnumb');
 
 var app = express();
 var homeController = require('./controllers/homeController');
-var loginController = require('./controllers/loginController');
+var accountController = require('./controllers/accountController');
 var registController = require('./controllers/registController');
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
@@ -43,5 +43,5 @@ app.get('/', (req, res) => {
 app.use('/regist',registController);
 app.use('/page', homeController);
 app.use('/home', homeController);
-app.use('/login', loginController);
+app.use('/account', accountController);
 app.listen(3000, () => { });
