@@ -17,4 +17,11 @@ router.get('/page', (req, res) => {
   res.render('page/page', vm);
 });
 
+router.get('/category', (req, res) => {
+  var vm = {
+    layout: 'page.handlebars'
+  };
+  res.render('page/category', vm);
+});
+
 module.exports = router;
