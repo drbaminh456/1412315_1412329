@@ -13,4 +13,10 @@ router.get('/register', (req, res) => {
   };
   res.render('register/register', vm);
 });
+router.get('/writer/post', (req, res) => {
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/writer', vm);
+});
 module.exports = router;
