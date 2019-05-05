@@ -19,4 +19,10 @@ router.get('/writer/post', (req, res) => {
   };
   res.render('log/writer', vm);
 });
+router.get('/my-profile', (req, res) => {
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/my-profile', vm);
+});
 module.exports = router;
