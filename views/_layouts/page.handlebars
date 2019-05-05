@@ -18,19 +18,57 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="../home">Home</a>
+                        <a class="navbar-brand" href="home">Home</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav"
                             aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation"><span
                                 class="navbar-toggler-icon"></span></button>
+                        
+                        <div class="collapse navbar-collapse" id="categoryNav">
+                            <ul class="navbar-nav ml-auto" id="categoryNav" role="tablist">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">Kinh doanh</a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab"
+                                            aria-controls="world-tab-7" aria-selected="false">Nông sản</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab"
+                                            aria-controls="world-tab-8" aria-selected="false">Hải sản</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">Tài chính - Ngân hàng</a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab"
+                                            aria-controls="world-tab-7" aria-selected="false">Chứng khoán</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab"
+                                            aria-controls="world-tab-8" aria-selected="false">Bảo hiểm</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Văn hóa - Xã hội</a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link" id="tab7" data-toggle="tab" href="#world-tab-7" role="tab" aria-controls="world-tab-7"
+                                            aria-selected="false">Văn hóa</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab" aria-controls="world-tab-8"
+                                            aria-selected="false">Xã hội</a>
+                                        <a class="nav-link" id="tab8" data-toggle="tab" href="#world-tab-8" role="tab" aria-controls="world-tab-8"
+                                            aria-selected="false">Đời sống</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
                         <div class="collapse navbar-collapse" id="worldNav">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#">My profile</a>
-                                        <a class="dropdown-item" href="login">Sign in</a>
-                                        <a class="dropdown-item" href="../account/register">Register</a>
-                                        <a class="dropdown-item" href="#">Sign up</a>
+                                        <a class="dropdown-item" href="account/login">Sign in</a>
+                                        <a class="dropdown-item" href="account/register">Register</a>
+                                        <a class="dropdown-item" href="#">Log Out</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -40,15 +78,9 @@
                                     <a class="nav-link" href="account/register">Register</a>
                                 </li> --}}
                             </ul>
-                            {{!-- <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../account/register">Register</a>
-                                </li>
-                            </ul> --}}
                         </div>
+                        
+
                     </nav>
                 </div>
             </div>
