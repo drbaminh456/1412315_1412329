@@ -25,4 +25,10 @@ router.get('/my-profile', (req, res) => {
   };
   res.render('log/my-profile', vm);
 });
+router.get('/admin', (req, res) => {
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/admin', vm);
+});
 module.exports = router;
