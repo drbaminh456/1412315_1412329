@@ -24,4 +24,11 @@ router.get('/category', (req, res) => {
   res.render('page/category', vm);
 });
 
+router.get('/searchresult', (req, res) => {
+  var vm = {
+    layout: 'page.handlebars'
+  };
+  res.render('page/searchresult', vm);
+});
+
 module.exports = router;
