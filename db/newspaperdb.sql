@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 05, 2019 at 10:33 PM
+-- Generation Time: Jun 06, 2019 at 12:51 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -197,11 +197,22 @@ INSERT INTO `editor_category_managements` (`id`, `Editor_ID`, `Category_ID`) VAL
 
 DROP TABLE IF EXISTS `editor_news_managements`;
 CREATE TABLE IF NOT EXISTS `editor_news_managements` (
-  `id` int(11) NOT NULL,
-  `News_ID` int(11) NOT NULL,
-  `Explanation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `Upload_Date` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Editor_ID` int(11) DEFAULT NULL,
+  `News_ID` int(11) DEFAULT NULL,
+  `Explanation` text,
+  `Upload_Date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `editor_news_managements`
+--
+
+INSERT INTO `editor_news_managements` (`id`, `Editor_ID`, `News_ID`, `Explanation`, `Upload_Date`) VALUES
+(1, 1, 20, 'Too bad', NULL),
+(2, 2, 40, 'Write some more', NULL),
+(3, 1, 60, 'Just no', NULL);
 
 -- --------------------------------------------------------
 
@@ -335,7 +346,21 @@ CREATE TABLE IF NOT EXISTS `news_comment` (
   `Content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   `Date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `news_comment`
+--
+
+INSERT INTO `news_comment` (`id`, `News_ID`, `Subscriber_ID`, `Content`, `Date`) VALUES
+(1, 1, 1, 'Ohh lalala', '2019-06-06'),
+(2, 1, 2, 'Oh no no no no', '2019-06-06'),
+(3, 1, 2, 'Nope', '2019-06-06'),
+(4, 1, 3, 'Oh ho ho ho ho ho', '2019-06-06'),
+(5, 2, 1, 'Baddd', '2019-06-06'),
+(6, 2, 2, 'Meh', '2019-06-06'),
+(7, 2, 2, 'Yike', '2019-06-06'),
+(8, 2, 3, 'Oh', '2019-06-06');
 
 -- --------------------------------------------------------
 
@@ -445,7 +470,17 @@ CREATE TABLE IF NOT EXISTS `reply_comment` (
   `Date` date DEFAULT NULL,
   `Content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reply_comment`
+--
+
+INSERT INTO `reply_comment` (`id`, `Subscriber_ID`, `Comment_ID`, `Date`, `Content`) VALUES
+(1, 1, 1, '2019-06-06', 'Haha'),
+(2, 3, 1, '2019-06-06', 'Damn'),
+(3, 1, 2, '2019-06-06', 'Lul'),
+(4, 3, 3, '2019-06-06', 'Ha ha');
 
 -- --------------------------------------------------------
 
