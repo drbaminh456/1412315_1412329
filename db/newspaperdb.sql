@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 06, 2019 at 12:51 PM
+-- Generation Time: Jun 06, 2019 at 01:04 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -81,12 +81,12 @@ INSERT INTO `account` (`account_id`, `email`, `password`, `first_name`, `last_na
 DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE IF NOT EXISTS `administrator` (
   `Account_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `User_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `First_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Last_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `User_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `First_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Last_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`Account_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `administrator`
@@ -139,12 +139,12 @@ INSERT INTO `category` (`id`, `name`) VALUES
 DROP TABLE IF EXISTS `editor`;
 CREATE TABLE IF NOT EXISTS `editor` (
   `Account_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `User_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `First_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Last_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `User_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `First_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Last_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`Account_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `editor`
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `editor_category_managements` (
   `Editor_ID` int(11) NOT NULL,
   `Category_ID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `editor_category_managements`
@@ -200,10 +200,10 @@ CREATE TABLE IF NOT EXISTS `editor_news_managements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Editor_ID` int(11) DEFAULT NULL,
   `News_ID` int(11) DEFAULT NULL,
-  `Explanation` text,
+  `Explanation` mediumtext COLLATE utf8mb4_vietnamese_ci,
   `Upload_Date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `editor_news_managements`
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `editor_writer_managements` (
   `Editor_ID` int(11) DEFAULT NULL,
   `Writer_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `editor_writer_managements`
@@ -251,16 +251,16 @@ INSERT INTO `editor_writer_managements` (`id`, `Editor_ID`, `Writer_ID`) VALUES
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
-  `Summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `Title` text COLLATE utf8mb4_vietnamese_ci,
+  `Summary` text COLLATE utf8mb4_vietnamese_ci,
   `Writer_ID` int(11) DEFAULT NULL,
   `Views` int(11) DEFAULT NULL,
-  `Thumbnail_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `Thumbnail_image` text COLLATE utf8mb4_vietnamese_ci,
   `Date` date DEFAULT NULL,
-  `Content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
-  `Status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Content` text COLLATE utf8mb4_vietnamese_ci,
+  `Status` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `news`
@@ -343,10 +343,10 @@ CREATE TABLE IF NOT EXISTS `news_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `News_ID` int(11) DEFAULT NULL,
   `Subscriber_ID` int(11) DEFAULT NULL,
-  `Content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `Content` text COLLATE utf8mb4_vietnamese_ci,
   `Date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `news_comment`
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `news_subcategory` (
   `News_ID` int(11) DEFAULT NULL,
   `Subcategory_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `news_subcategory`
@@ -454,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `news_tag` (
   `News_ID` int(11) DEFAULT NULL,
   `Tag_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 -- --------------------------------------------------------
 
@@ -468,9 +468,9 @@ CREATE TABLE IF NOT EXISTS `reply_comment` (
   `Subscriber_ID` int(11) DEFAULT NULL,
   `Comment_ID` int(11) DEFAULT NULL,
   `Date` date DEFAULT NULL,
-  `Content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `Content` text COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `reply_comment`
@@ -491,14 +491,14 @@ INSERT INTO `reply_comment` (`id`, `Subscriber_ID`, `Comment_ID`, `Date`, `Conte
 DROP TABLE IF EXISTS `subscriber`;
 CREATE TABLE IF NOT EXISTS `subscriber` (
   `Account_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `User_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `First_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Last_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `User_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `First_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Last_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Sign_Up_Date` date DEFAULT NULL,
   `Expired_Date` date DEFAULT NULL,
   PRIMARY KEY (`Account_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `subscriber`
@@ -586,9 +586,9 @@ INSERT INTO `sub_category` (`id`, `parentCategoryId`, `name`) VALUES
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
   `Tag_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Tag_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Tag_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`Tag_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `tag`
@@ -634,12 +634,12 @@ INSERT INTO `tag` (`Tag_ID`, `Tag_Name`) VALUES
 DROP TABLE IF EXISTS `writer`;
 CREATE TABLE IF NOT EXISTS `writer` (
   `Account_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `User_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `First_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Last_Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `User_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `First_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Last_Name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`Account_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `writer`
