@@ -6,7 +6,7 @@ exports.add = acc => {
     return db.save(sql);
 }
 
-exports.getMaxID = () => {
-    var sql = `select MAX(account_id) AS idmax from account`;
-    return db.load(sql);
-}
+// exports.getMaxID = () => {
+//     var sql = `select MAX(account_id) AS idmax from account`;
+//     return db.load(sql);
+// }

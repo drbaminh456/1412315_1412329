@@ -27,7 +27,7 @@ router.post('/register-success', (req, res) => {
     console.log('xxxxxxxxxxxx');
     
     var account = {
-      Email: req.body.Email,
+      Email: req.body.email,
       Password: SHA256(req.body.password).toString(),
       First_Name: req.body.firstName,
       Last_Name: req.body.lastName,
