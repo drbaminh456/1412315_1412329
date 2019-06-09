@@ -51,7 +51,6 @@ var sessionStore = new MySQLStore({
       }
   }
 });
-console.log(sessionStore);
 
 app.use(session({
   key: 'session_cookie_name',
