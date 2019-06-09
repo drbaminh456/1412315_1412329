@@ -1,7 +1,7 @@
 <style>
-header{
-    background-color: black;
-}
+    header {
+        background-color: black;
+    }
 </style>
 <section class="contact-area section-padding-100" style="padding-top: 80px; padding-bottom: 30px;">
     <div class="container">
@@ -9,11 +9,11 @@ header{
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="contact-form" style="padding: 30px 30px;">
                     <h5>Sign up</h5>
-                    <form action="#" method="post">
+                    <form action="register-success" method="post">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="group">
-                                    <input type="text" name="name" id="name" required>
+                                    <input type="text" name="firstName" id="firstName" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Enter your first name</label>
@@ -21,7 +21,7 @@ header{
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="group">
-                                    <input type="text" name="name" id="name" required>
+                                    <input type="text" name="lastName" id="lastName" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Enter your last name</label>
@@ -29,7 +29,7 @@ header{
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="group">
-                                    <input type="email" name="email" id="email" required>
+                                    <input type="email" name="email" id="Email" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Enter your email</label>
@@ -37,7 +37,7 @@ header{
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="group">
-                                    <input type="datetime-local" name="bdaytime">
+                                    <input type="datetime-local" name="birthDate">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Enter your birthday</label>
@@ -51,16 +51,12 @@ header{
                                     <label>Enter your password</label>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="group">
-                                    <input type="password" name="password" id="password" required>
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Confirm your password</label>
-                                </div>
-                            </div>
                             <div class="col-12">
-                                <button type="submit" class="btn world-btn">Sign up</button>
+                                <button class="btn world-btn">
+                                    <a href="register-success">
+                                        Sign up
+                                    </a>
+                                </button>
                             </div>
                         </div>
                     </form>
