@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 06, 2019 at 01:04 PM
+-- Generation Time: Jun 09, 2019 at 04:26 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `password` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `birthdate` datetime DEFAULT NULL,
   `account_type` varchar(15) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `username` (`email`)
@@ -44,33 +45,33 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`account_id`, `email`, `password`, `first_name`, `last_name`, `account_type`) VALUES
-(1, 'dangbaminh260896@gmail.com', '123456', 'Minh', 'Dang', 'administrator'),
-(2, '1412315@student.hcmus.edu.vn', '123456', 'Minh', 'Dang', 'editor'),
-(3, '1412329@student.hcmus.edu.vn', '123456', 'Minh', 'Vu', 'writer'),
-(4, 'vdminh131@gmail.com', '123456', 'Minh', 'Vu', 'subscriber'),
-(5, 'writer001', '123456', '000', '001', 'writer'),
-(6, 'writer002', '123456', '000', '002', 'writer'),
-(7, 'writer003', '123456', '000', '003', 'writer'),
-(8, 'writer004', '123456', '000', '004', 'writer'),
-(9, 'writer005', '123456', '000', '005', 'writer'),
-(10, 'writer006', '123456', '000', '006', 'writer'),
-(11, 'writer007', '123456', '000', '007', 'writer'),
-(12, 'writer008', '123456', '000', '008', 'writer'),
-(13, 'writer009', '123456', '000', '009', 'writer'),
-(14, 'writer010', '123456', '000', '010', 'writer'),
-(15, 'editor001', '123456', '001', '001', 'editor'),
-(16, 'editor002', '123456', '001', '002', 'editor'),
-(17, 'editor003', '123456', '001', '003', 'editor'),
-(18, 'editor004', '123456', '001', '004', 'editor'),
-(19, 'editor005', '123456', '001', '005', 'editor'),
-(20, 'admin001', '123456', '002', '001', 'administrator'),
-(21, 'admin002', '123456', '002', '002', 'administrator'),
-(22, 'subscriber001', '123456', '003', '001', 'subscriber'),
-(23, 'subscriber002', '123456', '003', '002', 'subscriber'),
-(24, 'subscriber003', '123456', '003', '003', 'subscriber'),
-(25, 'subscriber004', '123456', '003', '004', 'subscriber'),
-(26, 'subscriber005', '123456', '003', '005', 'subscriber');
+INSERT INTO `account` (`account_id`, `email`, `password`, `first_name`, `last_name`, `birthdate`, `account_type`) VALUES
+(1, 'dangbaminh260896@gmail.com', '123456', 'Minh', 'Dang', NULL, 'administrator'),
+(2, '1412315@student.hcmus.edu.vn', '123456', 'Minh', 'Dang', NULL, 'editor'),
+(3, '1412329@student.hcmus.edu.vn', '123456', 'Minh', 'Vu', NULL, 'writer'),
+(4, 'vdminh131@gmail.com', '123456', 'Minh', 'Vu', NULL, 'subscriber'),
+(5, 'writer001', '123456', '000', '001', NULL, 'writer'),
+(6, 'writer002', '123456', '000', '002', NULL, 'writer'),
+(7, 'writer003', '123456', '000', '003', NULL, 'writer'),
+(8, 'writer004', '123456', '000', '004', NULL, 'writer'),
+(9, 'writer005', '123456', '000', '005', NULL, 'writer'),
+(10, 'writer006', '123456', '000', '006', NULL, 'writer'),
+(11, 'writer007', '123456', '000', '007', NULL, 'writer'),
+(12, 'writer008', '123456', '000', '008', NULL, 'writer'),
+(13, 'writer009', '123456', '000', '009', NULL, 'writer'),
+(14, 'writer010', '123456', '000', '010', NULL, 'writer'),
+(15, 'editor001', '123456', '001', '001', NULL, 'editor'),
+(16, 'editor002', '123456', '001', '002', NULL, 'editor'),
+(17, 'editor003', '123456', '001', '003', NULL, 'editor'),
+(18, 'editor004', '123456', '001', '004', NULL, 'editor'),
+(19, 'editor005', '123456', '001', '005', NULL, 'editor'),
+(20, 'admin001', '123456', '002', '001', NULL, 'administrator'),
+(21, 'admin002', '123456', '002', '002', NULL, 'administrator'),
+(22, 'subscriber001', '123456', '003', '001', NULL, 'subscriber'),
+(23, 'subscriber002', '123456', '003', '002', NULL, 'subscriber'),
+(24, 'subscriber003', '123456', '003', '003', NULL, 'subscriber'),
+(25, 'subscriber004', '123456', '003', '004', NULL, 'subscriber'),
+(26, 'subscriber005', '123456', '003', '005', NULL, 'subscriber');
 
 -- --------------------------------------------------------
 
@@ -481,6 +482,20 @@ INSERT INTO `reply_comment` (`id`, `Subscriber_ID`, `Comment_ID`, `Date`, `Conte
 (2, 3, 1, '2019-06-06', 'Damn'),
 (3, 1, 2, '2019-06-06', 'Lul'),
 (4, 3, 3, '2019-06-06', 'Ha ha');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 -- --------------------------------------------------------
 
