@@ -76,11 +76,11 @@ router.get('/page/:id', function(req, res, next) {
 
   var t1 = newsRepo.singlePage(req.params.id);
 
-  Promise.all([t1]).then(([newsS]) => {
+  Promise.all([t1]).then(([news]) => {
 
       var vm = {
-          newsS: newsS,
-          layout: 'main.handlebars',
+          newsS: news,
+          layout: 'page.handlebars',
       };
       console.log(vm);
       
