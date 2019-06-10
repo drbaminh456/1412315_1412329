@@ -9,7 +9,6 @@ exports.load = sql => {
             password: '',
             database: 'newspaperdb'
         });
-        console.log(cn);
 
         cn.connect();
         cn.query(sql, function (error, rows, fields) {

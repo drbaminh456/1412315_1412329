@@ -61,6 +61,7 @@ router.get('/searchresult', (req, res) => {
 
 router.get('/page/:id', function(req, res, next) {
   var sql = `SELECT * FROM news WHERE id = ${req.params.id}`;
+<<<<<<< HEAD
   // var query = db.query(sql, function (err, result) {
   //     if(err) throw err;
   //     console.log('searching id with value = "${req.params.id}"');
@@ -85,6 +86,12 @@ router.get('/page/:id', function(req, res, next) {
       console.log(vm);
       
       res.render('page/page', vm);
+=======
+  var query = db.query(sql, function (err, result) {
+      if(err) throw err;
+      var model = {result: result}
+      res.render('page/details', { title: 'News', model });
+>>>>>>> c45078c759c154d6de8917c639d732057ecbee34
   });
 
   // newsRepo.singlePage(req.params.id).then(rows => {
