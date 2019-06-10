@@ -62,7 +62,6 @@ router.get('/details/:id', function(req, res, next) {
   var sql = `SELECT * FROM news WHERE id = ${req.params.id}`;
   var query = db.query(sql, function (err, result) {
       if(err) throw err;
-      console.log(result);
       var model = {result: result}
       res.render('page/details', { title: 'News', model });
   });

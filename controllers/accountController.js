@@ -18,24 +18,14 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register-success', (req, res) => {
-  // var account = {
-  //   Email: req.body.Email,
-  //   Password: SHA256(req.body.password).toString()
-  // };
-
-  // accountRepo.getMaxID().then(rows => {
-    console.log('xxxxxxxxxxxx');
-    
-    var account = {
-      Email: req.body.email,
-      Password: SHA256(req.body.password).toString(),
-      First_Name: req.body.firstName,
-      Last_Name: req.body.lastName,
-      Birthdate: req.body.birthDate
-    };
-    accountRepo.add(account);
-    // req.session.idAccount = customer.Account_ID;
-  // });
+  var account = {
+    Email: req.body.email,
+    Password: SHA256(req.body.password).toString(),
+    First_Name: req.body.firstName,
+    Last_Name: req.body.lastName,
+    Birthdate: req.body.birthDate
+  };
+  accountRepo.add(account);
   var vm = {
     layout: 'log.handlebars'
   };

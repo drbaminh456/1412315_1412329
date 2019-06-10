@@ -72,4 +72,3 @@ app.use('/page', homeController);
 app.use('/home', homeController);
 app.use('/account', accountController);
 app.listen(3000, () => { });
-console.log('test');
