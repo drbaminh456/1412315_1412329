@@ -1,7 +1,8 @@
 var db = require('../fn/db');
-var config = require('../config/config');
+// var config = require('../config/config');
 
-exports.single = newsId => {
-    var sql = `select * from news where id = ${newsId}`;
+exports.singlePage = news => {
+    var sql = `select * from news where id = '${news}'`;
+    console.log(sql);
     return db.load(sql);
 }
