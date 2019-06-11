@@ -32,7 +32,7 @@ router.get('/searchresult', (req, res) => {
   res.render('page/searchresult', vm);
 });
 
-router.get('/page/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   var sql = `SELECT * FROM news WHERE id = ${req.params.id}`;
 
 
@@ -41,12 +41,16 @@ router.get('/page/:id', function(req, res, next) {
   var t1 = newsRepo.singlePage(req.params.id);
 
   Promise.all([t1]).then(([news]) => {
-
+      var dateVar;
       var vm = {
+
           newsS: news,
           layout: 'page.handlebars',
       };
-      console.log(vm);
+      console.log(vm.newsS[0].id);
+      console.log(vm.newsS[0].Content);
+      console.log(dateVar);
+      console.log(vm.newsS[0].Date);
       
       res.render('page/page', vm);
 

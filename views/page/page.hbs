@@ -1,14 +1,17 @@
-
+{{#each newsS}}
 <div class="hero-area height-600 bg-img background-overlay"
-    style="background-image: url(/stylesheets/img/blog-img/bg2.jpg);">
+    style="background-image: url(/stylesheets/images/{{Thumbnail_image}});">
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="single-blog-title text-center">
                     <!-- Catagory -->
-                    <div class="post-cta"><a href="page/:id">travel</a></div>
-                    <h3>{{Title}}</h3>
-                    <div>{{Title}}</div>
+                    <div class="post-cta"><a href="page/{{id}}">travel</a></div>
+                    
+                    
+                    <h3 class="news-title">{{Title}}</h3>
+
+                    
                 </div>
             </div>
         </div>
@@ -23,17 +26,19 @@
                 <div class="single-blog-content mb-100">
                     <!-- Post Meta -->
                     <div class="post-meta">
-                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at
-                                9:48 am</a></p>
+                        <p><a href="#" class="post-author">Katy Liu</a> on <time class="news-date">{{Date}}</time></p>
                     </div>
                     <!-- Post Content -->
+                    
 
                     <div class="post-content">
-                        {{#each news}}
-                        <input name="newsid" type="hidden" value="{{id}}" hidden="true">
-                        <div>{{Title}}</div>
-                        <div>{{Content}}</div>
-                        {{/each}}
+                        <img src="/stylesheets/images/{{Thumbnail_image}}" width="40px" height="60px">
+                        <img src="/stylesheets/images/bo-truong-giao-thong-it-nhat.jpg" width="40px" height="60px">
+                        <img  src="/stylesheets/img/blog-img/bg2.jpg" width="40px" height="60px">
+
+                        <h6 class="news-images">{{Thumbnail_image}}</h6>
+                        <p class="news-content" style="white-space: pre-line;" >{{{Content}}}</p>
+                        
                         <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus
                             in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis.
                             Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus.
@@ -73,7 +78,7 @@
                                     2017 at 9:48 am</a></p>
                         </div>
                     </div>
-
+                {{/each}}
                 </div>
             </div>
             
