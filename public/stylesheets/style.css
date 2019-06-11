@@ -50,7 +50,9 @@ a {
     font-size: 14px;
     font-weight: 400;
     color: #0000ff; }
-
+h5{
+  margin-bottom: 20px !important;
+}
 #preloader {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -870,7 +872,7 @@ img {
 /* Contact Area CSS */
 .contact-form,
 .post-a-comment-area {
-  padding: 60px 55px;
+  padding: 30px 25px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); }
   @media only screen and (max-width: 767px) {
     .contact-form,
