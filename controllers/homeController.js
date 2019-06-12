@@ -53,12 +53,12 @@ router.get('/:id', function (req, res, next) {
 
   Promise.all([t1, t2]).then(([news, tag]) => {
     var vm = {
-      tags: tag,
+      tagS: tag,
       newsS: news,
       layout: 'page.handlebars',
     };
     res.render('page/page', vm);
-    console.log(vm.tags);
+    console.log(vm.tagS);
   });
 });
 

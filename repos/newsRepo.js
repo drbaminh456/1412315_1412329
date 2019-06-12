@@ -9,7 +9,7 @@ exports.singlePage = news => {
 }
 
 exports.LoadTag = news => {
-    var sql = `select *
+    var sql = `select t.Tag_Name, t.Tag_ID
                 from news N, tag T, news_tag NT
                 where N.news_id = '${news}' and N.news_id = NT.News_ID and t.Tag_ID = NT.Tag_ID`;
     console.log(sql);

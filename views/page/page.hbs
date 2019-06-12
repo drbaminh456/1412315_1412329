@@ -34,23 +34,23 @@
                     <div class="post-content">
                         <p class="news-content" style="white-space: pre-line;">{{{Content}}}</p>
                         <!-- Post Tags -->
-                        {{!-- <ul class="post-tags">
+                        <ul class="post-tags">
                             <li><a href="#">Manual</a></li>
                             <li><a href="#">Liberty</a></li>
                             <li><a href="#">Recommendations</a></li>
                             <li><a href="#">Interpritation</a></li>
-                        </ul> --}}
+                        </ul>
+
+                        <ul class="news-tags">
+                            {{#each tagS}}
+                            <li><a href="#">{{Tag_ID}}</a></li>
+                            {{/each}}
+                        </ul>
+ 
+                        <p>Hola hola: {{news_id}}</p>
                         
-                        <ul class="news-tags">
-                            {{#each tags}}
-                            <li><a href="#">{{{Tag_Name}}}</a></li>
-                            {{/each}}
-                        </ul>
-                        <ul class="news-tags">
-                            {{#each newsS}}
-                            <li><a href="#">{{Date}}</a></li>
-                            {{/each}}
-                        </ul>
+                            <a href="#">{{Tag_ID}}</a>
+                        
 
                         <!-- Post Meta -->
                         <div class="post-meta second-part">
@@ -60,6 +60,12 @@
                         <p class="news-views float-right">Views: {{Views}}</p>
                     </div>
                     {{/each}}
+
+                    <ul class="news-tags">
+                            {{#each tagS}}
+                            <li><a href="#">{{Tag_ID}}</a></li>
+                            {{/each}}
+                        </ul>
                 </div>
             </div>
 
