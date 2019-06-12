@@ -33,19 +33,32 @@ router.get('/searchresult', (req, res) => {
   res.render('page/searchresult', vm);
 });
 
+// router.get('/:id', function (req, res, next) {
+//   var t1 = newsRepo.singlePage(req.params.id);
+
+//   Promise.all([t1]).then(([news]) => {
+//     var vm = {
+      
+//       newsS: news,
+//       layout: 'page.handlebars',
+//     };
+//     res.render('page/page', vm);
+//     console.log(news[0].Date);
+//   });
+// });
+
 router.get('/:id', function (req, res, next) {
-  var sql = `SELECT * FROM news WHERE id = ${req.params.id}`;
   var t1 = newsRepo.singlePage(req.params.id);
+  var t2 = newsRepo.LoadTag(req.params.id);
 
-  Promise.all([t1]).then(([news]) => {
-    var dateVar;
+  Promise.all([t1, t2]).then(([news, tag]) => {
     var vm = {
-
+      tags: tag,
       newsS: news,
       layout: 'page.handlebars',
     };
     res.render('page/page', vm);
-
+    console.log(vm.tags);
   });
 });
 

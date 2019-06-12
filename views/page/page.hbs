@@ -6,12 +6,12 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="single-blog-title text-center">
                     <!-- Catagory -->
-                    <div class="post-cta"><a href="page/{{id}}">travel</a></div>
-                    
-                    
+                    <div class="post-cta"><a href="page/{{id}}">{{name}}</a></div>
+
+
                     <h3 class="news-title">{{Title}}</h3>
 
-                    
+
                 </div>
             </div>
         </div>
@@ -26,62 +26,43 @@
                 <div class="single-blog-content mb-100">
                     <!-- Post Meta -->
                     <div class="post-meta">
-                        <p><a href="#" class="post-author">Katy Liu</a> on <time class="news-date">{{Date}}</time></p>
+                        <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <p class="news-date">{{Date}}</p></p>
                     </div>
                     <!-- Post Content -->
-                    
+
 
                     <div class="post-content">
-                        <img src="/stylesheets/images/{{Thumbnail_image}}" width="40px" height="60px">
-                        <img src="/stylesheets/images/bo-truong-giao-thong-it-nhat.jpg" width="40px" height="60px">
-                        <img  src="/stylesheets/img/blog-img/bg2.jpg" width="40px" height="60px">
-
-                        <h6 class="news-images">{{Thumbnail_image}}</h6>
-                        <p class="news-content" style="white-space: pre-line;" >{{{Content}}}</p>
-                        
-                        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus
-                            in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis.
-                            Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus.
-                            Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget
-                            lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et
-                            quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada.
-                            Nunc rutrum hendrerit semper.</h6>
-                        <h6>Maecenas vitae sem varius, imperdiet nisi a, tristique nisi. Sed scelerisque suscipit leo
-                            cursus accumsan. Donec vel turpis quam. Mauris non nisl nec nunc gravida ullamcorper id
-                            vestibulum magna. Donec non velit finibus, laoreet arcu nec, facilisis augue. Aliquam sed
-                            purus id erat accumsan congue. Mauris semper ullamcorper nibh non pellentesque. Aenean
-                            euismod purus sit amet quam vehicula ornare.</h6>
-                        <blockquote class="mb-30">
-                            <h6>Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor
-                                blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex.
-                                Duis lacinia metus vel eros cursus pretium eget.</h6>
-                            <div class="post-author">
-                                <p>Robert Morgan</p>
-                            </div>
-                        </blockquote>
-                        <h6>Donec orci dolor, pretium in luctus id, consequat vitae nibh. Quisque hendrerit, lorem sit
-                            amet mollis malesuada, urna orci volutpat ex, sed scelerisque nunc velit et massa. Sed
-                            maximus id erat vel feugiat. Phasellus bibendum nisi non urna bibendum elementum. Aenean
-                            tincidunt nibh vitae ex facilisis ultrices. Integer ornare efficitur ultrices. Integer neque
-                            lectus, venenatis at pulvinar quis, aliquet id neque. Mauris ultrices consequat velit, sed
-                            dignissim elit posuere in. Cras vitae dictum dui.</h6>
+                        <p class="news-content" style="white-space: pre-line;">{{{Content}}}</p>
                         <!-- Post Tags -->
-                        <ul class="post-tags">
+                        {{!-- <ul class="post-tags">
                             <li><a href="#">Manual</a></li>
                             <li><a href="#">Liberty</a></li>
                             <li><a href="#">Recommendations</a></li>
                             <li><a href="#">Interpritation</a></li>
+                        </ul> --}}
+                        
+                        <ul class="news-tags">
+                            {{#each tags}}
+                            <li><a href="#">{{{Tag_Name}}}</a></li>
+                            {{/each}}
                         </ul>
+                        <ul class="news-tags">
+                            {{#each newsS}}
+                            <li><a href="#">{{Date}}</a></li>
+                            {{/each}}
+                        </ul>
+
                         <!-- Post Meta -->
                         <div class="post-meta second-part">
-                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
+                            <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a href="#" class="news-date">Sep 29,
                                     2017 at 9:48 am</a></p>
                         </div>
+                        <p class="news-views float-right">Views: {{Views}}</p>
                     </div>
-                {{/each}}
+                    {{/each}}
                 </div>
             </div>
-            
+
 
 
             <!-- ========== Sidebar Area ========== -->
