@@ -50,15 +50,21 @@ router.get('/searchresult', (req, res) => {
 router.get('/:id', function (req, res, next) {
   var t1 = newsRepo.singlePage(req.params.id);
   var t2 = newsRepo.LoadTag(req.params.id);
+  var t3 = newsRepo.LoadRandSameCategory(req.params.id);
+  var t4 = newsRepo.LoadRandSameCategory(req.params.id);
+  var t5 = newsRepo.LoadTopStories();
 
-  Promise.all([t1, t2]).then(([news, tag]) => {
+  Promise.all([t1, t2, t3, t4, t5]).then(([news, tag, sameCat, AsameCat, topSto]) => {
     var vm = {
       tagS: tag,
       newsS: news,
+      sameCats: sameCat,
+      AsameCats: AsameCat,
+      topStoS: topSto,
       layout: 'page.handlebars',
     };
     res.render('page/page', vm);
-    console.log(vm.tagS);
+
   });
 });
 

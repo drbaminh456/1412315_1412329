@@ -6,17 +6,14 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="single-blog-title text-center">
                     <!-- Catagory -->
-                    <div class="post-cta"><a href="page/{{id}}">{{name}}</a></div>
-
-
-                    <h3 class="news-title">{{Title}}</h3>
-
-
+                    <div class="post-cta"><a href="">{{cat_name}}</a></div>
+                    <h3 class="post-title">{{Title}}</h3>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{{/each}}
 
 <div class="main-content-wrapper section-padding-100">
     <div class="container">
@@ -24,48 +21,33 @@
             <!-- ============= Post Content Area ============= -->
             <div class="col-12 col-lg-8">
                 <div class="single-blog-content mb-100">
+                    {{#each newsS}}
                     <!-- Post Meta -->
                     <div class="post-meta">
-                        <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <p class="news-date">{{Date}}</p></p>
+                        <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a
+                                class="post-date">{{Date}}</a>
+                        </p>
                     </div>
                     <!-- Post Content -->
-
-
                     <div class="post-content">
-                        <p class="news-content" style="white-space: pre-line;">{{{Content}}}</p>
+                        <p style="white-space: pre-line;">{{{Content}}}</p>
+                        {{/each}}
                         <!-- Post Tags -->
                         <ul class="post-tags">
-                            <li><a href="#">Manual</a></li>
-                            <li><a href="#">Liberty</a></li>
-                            <li><a href="#">Recommendations</a></li>
-                            <li><a href="#">Interpritation</a></li>
-                        </ul>
-
-                        <ul class="news-tags">
                             {{#each tagS}}
-                            <li><a href="#">{{Tag_ID}}</a></li>
+                            <li><a href="#">{{Tag_Name}}</a></li>
                             {{/each}}
                         </ul>
- 
-                        <p>Hola hola: {{news_id}}</p>
-                        
-                            <a href="#">{{Tag_ID}}</a>
-                        
-
+                        {{#each newsS}}
                         <!-- Post Meta -->
                         <div class="post-meta second-part">
-                            <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a href="#" class="news-date">Sep 29,
+                            <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a href="#"
+                                    class="post-date">Sep 29,
                                     2017 at 9:48 am</a></p>
                         </div>
                         <p class="news-views float-right">Views: {{Views}}</p>
                     </div>
-                    {{/each}}
 
-                    <ul class="news-tags">
-                            {{#each tagS}}
-                            <li><a href="#">{{Tag_ID}}</a></li>
-                            {{/each}}
-                        </ul>
                 </div>
             </div>
 
@@ -76,83 +58,31 @@
                 <div class="post-sidebar-area mb-100">
                     <!-- Widget Area -->
                     <div class="sidebar-widget-area">
-                        <h5 class="title">About World</h5>
+                        <h5 class="title">Summary</h5>
                         <div class="widget-content">
-                            <p>The mango is perfect in that it is always yellow and if it’s not, I don’t want to hear
-                                about it. The mango’s only flaw, and it’s a minor one, is the effort it sometimes takes
-                                to undress the mango, carve it up in a way that makes sense, and find its way to the
-                                mouth.</p>
+                            <p>{{Summary}}</p>
                         </div>
                     </div>
+                    {{/each}}
                     <!-- Widget Area -->
                     <div class="sidebar-widget-area">
-                        <h5 class="title">Top Stories</h5>
+                        <h5 class="title">Top Views News</h5>
                         <div class="widget-content">
                             <!-- Single Blog Post -->
+                            {{#each topStoS}}
                             <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                                 <!-- Post Thumbnail -->
                                 <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b11.jpg" alt="">
+                                    <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    <a href="page" class="headline">
-                                        <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                                    <a href="{{news_id}}" class="headline">
+                                        <h5 class="mb-0">{{Title}}</h5>
                                     </a>
                                 </div>
                             </div>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b13.jpg" alt="">
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="page" class="headline">
-                                        <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b14.jpg" alt="">
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="page" class="headline">
-                                        <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b10.jpg" alt="">
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="page" class="headline">
-                                        <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b12.jpg" alt="">
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="page" class="headline">
-                                        <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                    </a>
-                                </div>
-                            </div>
+                            {{/each}}
                         </div>
                     </div>
                     <!-- Widget Area -->
@@ -287,167 +217,62 @@
             </div>
 
             <!-- ============== Related Post ============== -->
+
             <div class="row mt-70">
+                {{#each sameCats}}
                 <div class="col-12 col-md-6 col-lg-4">
                     <!-- Single Blog Post -->
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b1.jpg" alt="">
+                            <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
                             <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
+                            <div class="post-cta"><a href="category">{{subcat_name}}</a></div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
+                            <a href="{{news_id}}" class="headline">
+                                <h5>{{Title}}</h5>
                             </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
+                            <p>{{Summary}}</p>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
+                                <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a href="#"
+                                        class="post-date">{{Date}}</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b2.jpg" alt="">
-                            <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
-                            </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                            <!-- Post Meta -->
-                            <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b7.jpg" alt="">
-                            <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
-                            <!-- Video Button -->
-                            <a href="https://www.youtube.com/watch?v=IhnqEwFSJRg" class="video-btn"><i
-                                    class="fa fa-play"></i></a>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
-                            </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                            <!-- Post Meta -->
-                            <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{/each}}
             </div>
 
             <div class="row mt-70">
+                {{#each AsameCats}}
                 <div class="col-12 col-md-6 col-lg-4">
                     <!-- Single Blog Post -->
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b1.jpg" alt="">
+                            <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
                             <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
+                            <div class="post-cta"><a href="category">{{subcat_name}}</a></div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
+                            <a href="{{news_id}}" class="headline">
+                                <h5>{{Title}}</h5>
                             </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
+                            <p>{{Summary}}</p>
                             <!-- Post Meta -->
                             <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
+                                <p><a href="#" class="post-author">{{first_name}} {{last_name}}</a> on <a href="#"
+                                        class="post-date">{{Date}}</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b2.jpg" alt="">
-                            <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
-                            </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                            <!-- Post Meta -->
-                            <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail">
-                            <img src="/stylesheets/img/blog-img/b7.jpg" alt="">
-                            <!-- Catagory -->
-                            <div class="post-cta"><a href="category">travel</a></div>
-                            <!-- Video Button -->
-                            <a href="https://www.youtube.com/watch?v=IhnqEwFSJRg" class="video-btn"><i
-                                    class="fa fa-play"></i></a>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="page" class="headline">
-                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                    Physics?</h5>
-                            </a>
-                            <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                            <!-- Post Meta -->
-                            <div class="post-meta">
-                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29,
-                                        2017 at 9:48 am</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{/each}}
             </div>
-
-
         </div>
     </div>
 </div>
