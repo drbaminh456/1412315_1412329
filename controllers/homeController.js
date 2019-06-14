@@ -81,7 +81,7 @@ router.get('/:id', function (req, res, next) {
       layout: 'page.handlebars',
     };
     res.render('page/page', vm);
-
+    
   });
 });
 
