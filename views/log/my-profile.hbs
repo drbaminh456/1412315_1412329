@@ -15,7 +15,7 @@
                         <label>Họ tên: </label>
                     </div>
                     <div class="col-md-7">
-                        <span>abc</span>
+                        <span>{{name}}</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -23,7 +23,7 @@
                         <label>Email: </label>
                     </div>
                     <div class="col-md-7">
-                        <span>abc@gmail.com</span>
+                        <span>{{email}}</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -31,7 +31,7 @@
                         <label>Chức vụ: </label>
                     </div>
                     <div class="col-md-7">
-                        <span>writer</span>
+                        <span>{{accoutnType}}</span>
                     </div>
                 </div>
             </div>
@@ -41,17 +41,19 @@
                         <label>Ngày tháng năm sinh: </label>
                     </div>
                     <div class="col-md-7">
-                        <span>abc</span>
+                        <span>{{birthDate}}</span>
                     </div>
                 </div>
+                {{#if isWriter}}
                 <div class="form-group row">
                     <div class="col-md-5">
                         <label>Bút danh:</label>
                     </div>
                     <div class="col-md-7">
-                        <span>abc</span>
+                        <span>{{accoutnType}}</span>
                     </div>
                 </div>
+                {{/if}}
             </div>
         </div>
         <div class="form-group row">

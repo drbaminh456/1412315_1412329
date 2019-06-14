@@ -41,6 +41,11 @@ router.get('/writer/post', (req, res) => {
 
 router.get('/my-profile', (req, res) => {
   var vm = {
+    email: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.email : 'Please login to show',
+    name: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.name : 'Please login to show',
+    birthDate: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.birthDate : 'Please login to show',
+    accoutnType: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.role : 'Please login to show',
+    isWriter: req.session.accoutnType == 'writer' ? true : false,
     layout: 'log.handlebars'
   };
   res.render('log/my-profile', vm);
