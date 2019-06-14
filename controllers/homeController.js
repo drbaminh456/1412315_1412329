@@ -48,41 +48,32 @@ router.get('/searchresult', (req, res) => {
   res.render('page/searchresult', vm);
 });
 
-// router.get('/:id', function (req, res, next) {
-//   var t1 = newsRepo.singlePage(req.params.id);
-
-//   Promise.all([t1]).then(([news]) => {
-//     var vm = {
-      
-//       newsS: news,
-//       layout: 'page.handlebars',
-//     };
-//     res.render('page/page', vm);
-//     console.log(news[0].Date);
-//   });
-// });
-
 router.get('/:id', function (req, res, next) {
-  var t1 = newsRepo.singlePage(req.params.id);
-  var t2 = newsRepo.LoadTag(req.params.id);
-  var t3 = newsRepo.LoadRandSameCategory(req.params.id);
-  var t4 = newsRepo.LoadRandSameCategory(req.params.id);
-  var t5 = newsRepo.LoadTopStories();
-  var t6 = newsRepo.LoadRandStories();
+  var newsid = req.params.id;
+  newsRepo.single(newsid).then(rows => {
+    newsRepo.updateView(newsid, rows[0].Views + 1);
 
-  Promise.all([t1, t2, t3, t4, t5, t6]).then(([news, tag, sameCat, AsameCat, topSto, ranSto]) => {
-    var vm = {
-      tagS: tag,
-      newsS: news,
-      sameCats: sameCat,
-      AsameCats: AsameCat,
-      topStoS: topSto,
-      ranStoS: ranSto,
-      layout: 'page.handlebars',
-    };
-    res.render('page/page', vm);
-    
+    var t1 = newsRepo.singlePage(rows[0].news_id);
+    var t2 = newsRepo.LoadTag(rows[0].news_id);
+    var t3 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+    var t4 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+    var t5 = newsRepo.LoadTopStories();
+    var t6 = newsRepo.LoadRandStories();
+
+    Promise.all([t1, t2, t3, t4, t5, t6]).then(([news, tag, sameCat, AsameCat, topSto, ranSto]) => {
+      var vm = {
+        tagS: tag,
+        newsS: news,
+        sameCats: sameCat,
+        AsameCats: AsameCat,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars',
+      };
+      res.render('page/page', vm);
+    });
   });
+
 });
 
 router.post('/', (req, res) => {

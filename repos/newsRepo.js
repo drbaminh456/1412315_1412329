@@ -9,6 +9,11 @@ var db = require('../fn/db');
 //     return db.load(sql);
 // }
 
+exports.single = proId => {
+    var sql = `select * from news where news_id = ${proId}`;
+    return db.load(sql);
+}
+
 exports.singlePage = news => {
     var sql = `select N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.first_name, A.last_name, A.account_id, A.nickname, 
                     NS.Subcategory_ID, S.subcat_name, S.parentCategoryId, C.category_id, C.cat_name
@@ -52,5 +57,11 @@ exports.LoadRandStories = () => {
                 order by RAND()
                 limit 1`;
     return db.load(sql);
+}
+
+exports.updateView = (id, view) => {
+    var sql = `update news set Views = '${view}'
+    where news_id = '${id}'`;
+    return db.save(sql);
 }
 
