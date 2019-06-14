@@ -3,6 +3,21 @@ var router = express.Router();
 var newsRepo = require('../repos/newsRepo');
 var accountRepo = require('../repos/accountRepo');
 var SHA256 = require('crypto-js/sha256');
+
+function formatDate(date) {
+  var monthNames = [
+    "Jan", "Feb", "Mar",
+    "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct",
+    "Nov", "Dec"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return monthNames[monthIndex] + ' ' + day + ', ' + year;
+}
 /* GET home page. */
 router.get('/', (req, res) => {
   var vm = {
@@ -84,6 +99,19 @@ router.post('/', (req, res) => {
           layout: 'log.handlebars'
         }
         res.render('log/admin', vm);
+      } else if (rows[0].account_type === 'subscriber') {
+        var vm = {
+          name: req.body.email,
+          layout: 'main.handlebars'
+        }
+        req.session.isLogged = true;
+        req.session.email = rows[0].email;
+        req.session.idAccount = rows[0].account_id;
+        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.birthDate = formatDate(rows[0].birthdate);
+        req.session.role = rows[0].account_type;
+        res.render('home/home', vm);
+
       }
     } else {
       var vm = {
