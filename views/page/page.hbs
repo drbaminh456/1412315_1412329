@@ -106,16 +106,17 @@
                             <!-- Single Blog Post -->
                             <div class="single-blog-post todays-pick">
                                 <!-- Post Thumbnail -->
+                                {{#each ranStoS}}
                                 <div class="post-thumbnail">
-                                    <img src="/stylesheets/img/blog-img/b22.jpg" alt="">
+                                    <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content px-0 pb-0">
-                                    <a href="page" class="headline">
-                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in
-                                            Physics?</h5>
+                                    <a href="{{news_id}}" class="headline">
+                                        <h5>{{Title}}</h5>
                                     </a>
                                 </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>

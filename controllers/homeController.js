@@ -53,14 +53,16 @@ router.get('/:id', function (req, res, next) {
   var t3 = newsRepo.LoadRandSameCategory(req.params.id);
   var t4 = newsRepo.LoadRandSameCategory(req.params.id);
   var t5 = newsRepo.LoadTopStories();
+  var t6 = newsRepo.LoadRandStories();
 
-  Promise.all([t1, t2, t3, t4, t5]).then(([news, tag, sameCat, AsameCat, topSto]) => {
+  Promise.all([t1, t2, t3, t4, t5, t6]).then(([news, tag, sameCat, AsameCat, topSto, ranSto]) => {
     var vm = {
       tagS: tag,
       newsS: news,
       sameCats: sameCat,
       AsameCats: AsameCat,
       topStoS: topSto,
+      ranStoS: ranSto,
       layout: 'page.handlebars',
     };
     res.render('page/page', vm);

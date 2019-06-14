@@ -37,3 +37,11 @@ exports.LoadTopStories = () => {
     return db.load(sql);
 }
 
+exports.LoadRandStories = () => {
+    var sql = `select *
+                from news
+                order by RAND()
+                limit 1`;
+    return db.load(sql);
+}
+
