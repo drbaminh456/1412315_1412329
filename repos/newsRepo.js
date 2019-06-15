@@ -65,16 +65,44 @@ exports.updateView = (id, view) => {
     return db.save(sql);
 }
 
+exports.SearchSameCategory = categoryname  => {
+    var sql = `select N1.news_id, N1.Title, N1.Summary, DATE_FORMAT(N1.Date, "%b %e, %Y") AS Date, S1.subcat_name, A.last_name, A.first_name, A.nickname, N1.Thumbnail_image
+                from news N1, news_subcategory NS1, sub_category S1, category C1, account A
+                where N1.news_id = NS1.News_ID and NS1.Subcategory_ID = S1.id
+                    and S1.parentCategoryId = C1.category_id
+                    and C1.cat_name = '${categoryname}'
+                    and N1.Writer_ID = A.account_id
+                order by RAND()
+                limit 3`;
+    return db.load(sql);
+}
+
+exports.SearchSameTag = tagname  => {
+    var sql = `select N1.news_id, N1.Title, N1.Summary, DATE_FORMAT(N1.Date, "%b %e, %Y") AS Date, S1.subcat_name, A.last_name, A.first_name, A.nickname, N1.Thumbnail_image, T.Tag_Name
+                from news N1, news_subcategory NS1, sub_category S1, category C1, account A, tag T, news_tag NT
+                where N1.news_id = NS1.News_ID and NS1.Subcategory_ID = S1.id
+                    and S1.parentCategoryId = C1.category_id
+                    and N1.news_id = NT.News_ID and NT.Tag_ID = T.Tag_ID
+                    and N1.Writer_ID = A.account_id
+                    and T.Tag_Name = '${tagname}'
+                order by RAND()
+                limit 3`;
+    return db.load(sql);
+}
+
 exports.LoadCategoryList = () => {
     var sql = `select category_id, cat_name
-                from category`;
+                from category
+                order by category_id ASC
+                limit 6`;
     return db.load(sql);
 }
 
 exports.LoadSubCategoryList = () => {
-    var sql = `select C.category_id, C.cat_name, S.id, S.parentCategoryId, S.subcat_name
+    var sql = `select distinct C.category_id, C.cat_name, S.id, S.parentCategoryId, S.subcat_name
                 from category C, sub_category S
-                where C.category_id = S.parentCategoryId`;
+                where C.category_id = S.parentCategoryId
+                order by C.category_id ASC`;
     return db.load(sql);
 }
 

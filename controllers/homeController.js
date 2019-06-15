@@ -24,8 +24,35 @@ function formatDate(date) {
 
   return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
+//#region Sample Code
+// router.get('/news-search/bytag/:tag', (req, res) => {
+//   var newstags = req.params.tag;
+//   var t1 = newsRepo.SearchSameTag(newstags);
+//   var t2 = newsRepo.LoadTopStories();
+//   Promise.all([t1, t2]).then(([news, topSto]) => {
+//     var vm = {
+//       newsS: news,
+//       topStoS: topSto,
+//       layout: 'page.handlebars',
+//     };
+//     res.render('page/tag', vm);
+//   })
+
+// });
+//#endregion
+
 /* GET home page. */
 router.get('/', (req, res) => {
+  var vm = {
+    layout: 'main.handlebars'
+  };
+  res.render('home/home', vm);
+});
+router.get('/logout', (req, res) => {
+  if (req.session.isLogged == true) {
+    req.session.isLogged == false;
+    req.session.destroy();
+  }
   var vm = {
     layout: 'main.handlebars'
   };
@@ -40,6 +67,37 @@ router.get('/page', (req, res) => {
   res.render('page/page', vm);
 });
 
+// router.get('/:category', (req, res) => {
+//   var newscategory = req.params.category;
+//   var t1 = newsRepo.SearchSameCategory(newscategory);
+//   Promise.all([t1]).then(([news]) => {
+//     var vm = {
+//       newS: news,
+//       layout: 'page.handlebars'
+//     };
+//     res.render('page/category', vm);
+//     console.log(vm);
+    
+//   })
+
+// });
+
+router.get('/news-search/bytag/:tag', (req, res) => {
+  var newstags = req.params.tag;
+  var t1 = newsRepo.SearchSameTag(newstags);
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadRandStories();
+  Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+    var vm = {
+      newsS: news,
+      topStoS: topSto,
+      ranStoS: ranSto,
+      layout: 'page.handlebars',
+    };
+    res.render('page/tag', vm);
+  })
+
+});
 
 router.get('/searchresult', (req, res) => {
   var vm = {
@@ -74,13 +132,6 @@ router.get('/:id', function (req, res, next) {
     });
   });
 
-});
-
-router.get('/:category', (req, res) => {
-  var vm = {
-    layout: 'page.handlebars'
-  };
-  res.render('page/category', vm);
 });
 
 router.post('/', (req, res) => {
