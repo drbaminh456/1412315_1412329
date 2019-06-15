@@ -11,10 +11,16 @@ function formatDate(date) {
     "Aug", "Sep", "Oct",
     "Nov", "Dec"
   ];
+  if (date != null) {
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+  } else {
+    var day = '';
+    var monthIndex = '';
+    var year = '';
+  }
 
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
 
   return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
@@ -99,6 +105,12 @@ router.post('/', (req, res) => {
           isAdmin: true,
           layout: 'log.handlebars'
         }
+        req.session.isLogged = true;
+        req.session.email = rows[0].email;
+        req.session.idAccount = rows[0].account_id;
+        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.birthDate = formatDate(rows[0].birthdate);
+        req.session.role = rows[0].account_type;
         res.render('log/admin', vm);
       } else if (rows[0].account_type === 'subscriber') {
         var vm = {

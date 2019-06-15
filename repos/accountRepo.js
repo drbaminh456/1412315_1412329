@@ -15,6 +15,5 @@ exports.changePwd = user => {
 }
 exports.addNewPwd = obj => {
     var sql = `UPDATE account set password = '${obj.newPassword}' where email = '${obj.email}'`;
-    console.log(sql);
     return db.save(sql);
 }
