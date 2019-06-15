@@ -32,7 +32,7 @@ router.post('/register-success', (req, res) => {
   res.render('register/register-success', vm);
 });
 
-router.get('/writer/post', (req, res) => {
+router.get('/writer', (req, res) => {
   var vm = {
     layout: 'log.handlebars'
   };
@@ -86,5 +86,15 @@ router.post('/change-password', (req, res) => {
   //   layout: 'log.handlebars'
   // };
   // res.render('log/change-password-success', vm);
+});
+router.get('/logout', (req, res) => {
+  if (req.session.isLogged == true) {
+    req.session.isLogged == false;
+    req.session.destroy();
+  }
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/logout', vm);
 });
 module.exports = router;
