@@ -693,5 +693,4 @@ CREATE TABLE IF NOT EXISTS `writer` (
 INSERT INTO `writer` (`Account_ID`, `User_Name`, `Password`, `First_Name`, `Last_Name`, `Writer_nickname`) VALUES
 (1, 'writer001', '123456', 'w001', 'writer', 'Mikasa'),
 (2, 'writer002', '123456', 'w002', 'writer', 'Oklahoma'),
-(3, 'writer003', '123456', 'w003', 'writer', 'Hood'),
-(4, 'writer004',
+(3, 'writer003', '123456', 'w003', 'writer', 'Hood');
