@@ -9,3 +9,12 @@ exports.login = user => {
     var sql = `select * from account where email = '${user.Email}' and password = '${user.Password}'`;
     return db.load(sql);
 }
+exports.changePwd = user => {
+    var sql = `select password from account where email = '${user.email}'`;
+    return db.load(sql);
+}
+exports.addNewPwd = obj => {
+    var sql = `UPDATE account set password = '${obj.newPassword}' where email = '${obj.email}'`;
+    console.log(sql);
+    return db.save(sql);
+}

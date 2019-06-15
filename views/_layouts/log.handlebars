@@ -67,7 +67,7 @@
                                         <a class="dropdown-item" href="../account/my-profile">My profile</a>
                                         <a class="dropdown-item" href="login">Sign in</a>
                                         <a class="dropdown-item" href="../account/register">Register</a>
-                                        <a class="dropdown-item" href="../../home">Log out</a>
+                                        <a class="dropdown-item" href="../../home/logout">Log out</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -143,29 +143,45 @@
             theme: 'snow'
         });
     </script>
-        <script type="text/javascript">
-        $(document).ready(function(){
+    <script type="text/javascript">
+        $(document).ready(function () {
             // Activate tooltip
             $('[data-toggle="tooltip"]').tooltip();
-            
+
             // Select/Deselect checkboxes
             var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function(){
-                if(this.checked){
-                    checkbox.each(function(){
-                        this.checked = true;                        
+            $("#selectAll").click(function () {
+                if (this.checked) {
+                    checkbox.each(function () {
+                        this.checked = true;
                     });
-                } else{
-                    checkbox.each(function(){
-                        this.checked = false;                        
+                } else {
+                    checkbox.each(function () {
+                        this.checked = false;
                     });
-                } 
+                }
             });
-            checkbox.click(function(){
-                if(!this.checked){
+            checkbox.click(function () {
+                if (!this.checked) {
                     $("#selectAll").prop("checked", false);
                 }
             });
         });
+    </script>
+    <script type="text/javascript">
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("changePassword");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>

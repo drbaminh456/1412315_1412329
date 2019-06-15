@@ -58,4 +58,28 @@ router.get('/admin', (req, res) => {
   res.render('log/admin', vm);
 });
 
+router.post('/change-password-success', (req, res) => {
+  var obj = {
+    email: req.session.email,
+    oldPassword: SHA256(req.body.oldPwd).toString(),
+    newPassword: SHA256(req.body.newPwd).toString()
+  };
+  accountRepo.changePwd(obj).then(rows => {
+    if(rows.length > 0){
+      if(rows[0].password === obj.oldPassword){
+        accountRepo.addNewPwd(obj);
+        var vm = {
+          layout: 'log.handlebars',
+          isSuccess: true
+        };
+        
+        res.render('log/change-password-success', vm);
+      }
+    }
+  });
+  // var vm = {
+  //   layout: 'log.handlebars'
+  // };
+  // res.render('log/change-password-success', vm);
+});
 module.exports = router;

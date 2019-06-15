@@ -31,7 +31,7 @@
                         <label>Chức vụ: </label>
                     </div>
                     <div class="col-md-7">
-                        <span>{{accoutnType}}</span>
+                        <span>{{accountType}}</span>
                     </div>
                 </div>
             </div>
@@ -60,9 +60,50 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
-                <button class="btn btn-white" type="button">Cancel</button> &nbsp;
-                <button class="btn btn-primary" type="button">Change Password</button>
+                <button class="btn btn-primary" type="button" id="changePassword">Change Password</button>
             </div>
         </div>
     </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="container">
+            <form action="/account/change-password-success" method="post">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <strong>Old Password*:</strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" name="oldPwd" id="oldPwd" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <strong>New Password*:</strong>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" name="newPwd" id="newPwd" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>

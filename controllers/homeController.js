@@ -20,6 +20,12 @@ function formatDate(date) {
 }
 /* GET home page. */
 router.get('/', (req, res) => {
+  var vm = {
+    layout: 'main.handlebars'
+  };
+  res.render('home/home', vm);
+});
+router.get('/logout', (req, res) => {
   if (req.session.isLogged == true) {
     req.session.isLogged == false;
     req.session.destroy();
@@ -29,17 +35,6 @@ router.get('/', (req, res) => {
   };
   res.render('home/home', vm);
 });
-// router.get('/logout', (req, res) => {
-//   console.log(req.session);
-//   if (req.session.isLogged == true) {
-//     req.session.isLogged == false;
-//     req.session.destroy();
-//   }
-//   var vm = {
-//     layout: 'main.handlebars'
-//   };
-//   res.render('home/home', vm);
-// });
 
 /* GET single page. */
 router.get('/page', (req, res) => {
