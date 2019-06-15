@@ -75,8 +75,6 @@ router.post('/change-password', (req, res) => {
         res.render('log/change-password', vm);
       }
     } else if (rows[0].password != obj.oldPassword){
-      console.log('xxxxxx');
-      
       var vm = {
         layout: 'log.handlebars',
         isSuccess: false

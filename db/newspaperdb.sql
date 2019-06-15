@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 14, 2019 at 04:34 PM
+-- Generation Time: Jun 15, 2019 at 07:32 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS `account` (
   `nickname` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `username` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`account_id`, `email`, `password`, `first_name`, `last_name`, `birthdate`, `account_type`, `nickname`) VALUES
-(1, 'dangbaminh260896@gmail.com', '123456', 'Minh', 'Dang', NULL, 'administrator', 'Oklahoma'),
+(1, 'dangbaminh260896@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'Minh', 'Dang', NULL, 'administrator', 'Oklahoma'),
 (2, '1412315@student.hcmus.edu.vn', '123456', 'Minh', 'Dang', NULL, 'editor', 'Chicago'),
 (3, '1412329@student.hcmus.edu.vn', '123456', 'Minh', 'Vu', NULL, 'writer', 'Hood'),
 (4, 'vdminh131@gmail.com', '123456', 'Minh', 'Vu', NULL, 'subscriber', 'Leander'),
@@ -73,7 +73,7 @@ INSERT INTO `account` (`account_id`, `email`, `password`, `first_name`, `last_na
 (24, 'subscriber003', '123456', '003', '003', NULL, 'subscriber', 'Laffey'),
 (25, 'subscriber004', '123456', '003', '004', NULL, 'subscriber', 'StLouis'),
 (26, 'subscriber005', '123456', '003', '005', NULL, 'subscriber', 'Lena'),
-(27, 'dinhhai1002@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'Dinh', 'Hai', '1996-08-26', 'subscriber', NULL);
+(27, 'dinhhai1002@gmail.com', '472bbe83616e93d3c09a79103ae47d8f71e3d35a966d6e8b22f743218d04171d', 'Dinh', 'Hai', '1996-08-26', 'subscriber', NULL);
 
 -- --------------------------------------------------------
 
@@ -519,6 +519,13 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('I4UK1DFnynSinwCfLGvaxjkaYCv2IM3B', 1560670082, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":true,\"email\":\"dangbaminh260896@gmail.com\",\"idAccount\":1,\"name\":\"Minh Dang\",\"birthDate\":\"undefined , \",\"role\":\"administrator\"}');
+
 -- --------------------------------------------------------
 
 --
@@ -687,13 +694,4 @@ INSERT INTO `writer` (`Account_ID`, `User_Name`, `Password`, `First_Name`, `Last
 (1, 'writer001', '123456', 'w001', 'writer', 'Mikasa'),
 (2, 'writer002', '123456', 'w002', 'writer', 'Oklahoma'),
 (3, 'writer003', '123456', 'w003', 'writer', 'Hood'),
-(4, 'writer004', '123456', 'w004', 'writer', 'Nagato'),
-(5, 'writer005', '123456', 'w005', 'writer', 'Amagi'),
-(6, 'writer006', '123456', 'w006', 'writer', 'Yanami'),
-(7, 'writer007', '123456', 'w007', 'writer', 'Roon'),
-(8, 'writer008', '123456', 'w008', 'writer', 'Mornach');
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(4, 'writer004',
