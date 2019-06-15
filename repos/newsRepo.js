@@ -65,3 +65,18 @@ exports.updateView = (id, view) => {
     return db.save(sql);
 }
 
+exports.LoadCategoryList = () => {
+    var sql = `select category_id, cat_name
+                from category`;
+    return db.load(sql);
+}
+
+exports.LoadSubCategoryList = () => {
+    var sql = `select C.category_id, C.cat_name, S.id, S.parentCategoryId, S.subcat_name
+                from category C, sub_category S
+                where C.category_id = S.parentCategoryId`;
+    return db.load(sql);
+}
+
+
+

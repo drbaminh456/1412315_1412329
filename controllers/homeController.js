@@ -50,12 +50,6 @@ router.get('/page', (req, res) => {
   res.render('page/page', vm);
 });
 
-router.get('/category', (req, res) => {
-  var vm = {
-    layout: 'page.handlebars'
-  };
-  res.render('page/category', vm);
-});
 
 router.get('/searchresult', (req, res) => {
   var vm = {
@@ -90,6 +84,13 @@ router.get('/:id', function (req, res, next) {
     });
   });
 
+});
+
+router.get('/:category', (req, res) => {
+  var vm = {
+    layout: 'page.handlebars'
+  };
+  res.render('page/category', vm);
 });
 
 router.post('/', (req, res) => {
