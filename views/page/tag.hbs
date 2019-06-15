@@ -1,0 +1,117 @@
+<div class="main-content-wrapper section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- ============= Post Content Area Start ============= -->
+            <div class="col-12 col-lg-8">
+                <div class="post-content-area mb-100">
+                    <!-- Catagory Area -->
+
+                    <div class="world-catagory-area">
+                        
+                        <h2 class="title mb-70">Search results with tag: {{tag}}</h2>              
+                        {{#each newsS}}
+                        <div class="single-blog-post post-style-4 d-flex align-items-center">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                                <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <a href="../../{{news_id}}" class="headline">
+                                    <h5>{{Title}}</h5>
+                                </a>
+                                <p>{{Summary}}</p>
+                                <!-- Post Meta -->
+                                <div class="post-meta">
+                                    <p><a href="#" class="post-author">{{nickname}}</a> on <a href="#"
+                                            class="post-date">{{Date}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== Sidebar Area ========== -->
+            <div class="col-12 col-md-8 col-lg-4">
+                <div class="post-sidebar-area">
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">About This Project</h5>
+                        <div class="widget-content">
+                            <p>Developed by 1412315 and 1412329 as our (hope so) final project to graduate</p>
+                        </div>
+                    </div>
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">Top Views News</h5>
+                        <div class="widget-content">
+                            <!-- Single Blog Post -->
+                            {{#each topStoS}}
+                            <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{{news_id}}" class="headline">
+                                        <h5 class="mb-0">{{Title}}</h5>
+                                    </a>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">Stay Connected</h5>
+                        <div class="widget-content">
+                            <div class="social-area d-flex justify-content-between">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-vimeo"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">Today’s Pick</h5>
+                        <div class="widget-content">
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post todays-pick">
+                                <!-- Post Thumbnail -->
+                                {{#each ranStoS}}
+                                <div class="post-thumbnail">
+                                    <img src="/stylesheets/images/{{Thumbnail_image}}" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content px-0 pb-0">
+                                    <a href="{{news_id}}" class="headline">
+                                        <h5>{{Title}}</h5>
+                                    </a>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More btn -->
+        <div class="row">
+            <div class="col-12">
+                <div class="load-more-btn mt-50 text-center">
+                    <a href="#" class="btn world-btn">Load More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

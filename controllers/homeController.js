@@ -89,6 +89,7 @@ router.get('/news-search/bytag/:tag', (req, res) => {
   var t3 = newsRepo.LoadRandStories();
   Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
     var vm = {
+      tag: req.params.tag,
       newsS: news,
       topStoS: topSto,
       ranStoS: ranSto,
