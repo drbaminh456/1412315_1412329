@@ -82,6 +82,17 @@ router.get('/page', (req, res) => {
 
 // });
 
+router.get('/category', (req, res) => {
+  var vm = {
+    layout: 'page.handlebars'
+  };
+    res.render('page/category', vm);
+    console.log(vm);
+    
+
+});
+
+
 router.get('/news-search/bytag/:tag', (req, res) => {
   var newstags = req.params.tag;
   var t1 = newsRepo.SearchSameTag(newstags);
