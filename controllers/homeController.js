@@ -77,7 +77,7 @@ router.get('/page', (req, res) => {
 //     };
 //     res.render('page/category', vm);
 //     console.log(vm);
-    
+
 //   })
 
 // });
@@ -86,7 +86,7 @@ router.get('/category', (req, res) => {
   var vm = {
     layout: 'page.handlebars'
   };
-    res.render('page/category', vm);
+  res.render('page/category', vm);
 
 });
 
@@ -109,11 +109,26 @@ router.get('/news-search/bytag/:tag', (req, res) => {
 
 });
 
-router.get('/searchresult', (req, res) => {
-  var vm = {
-    layout: 'page.handlebars'
-  };
-  res.render('page/searchresult', vm);
+router.post('/searchresult', (req, res) => {
+  var Searchphrase = req.body.search;
+  var t1 = newsRepo.SearchFTS(Searchphrase);
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadRandStories();
+  var t4 = newsRepo.CountSearchResult(Searchphrase);
+  var object;
+  Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto]) => {
+    var vm = {
+      Phrase: Searchphrase,
+      newsS: news,
+      //result: t4 == `Promise { [ RowDataPacket { 'Count(news_id)': 0 } ] }` ? false : true,
+      result: news.length === 0 ? false : true,
+      topStoS: topSto,
+      ranStoS: ranSto,
+      layout: 'page.handlebars'
+    };
+    res.render('page/searchresult', vm);
+  })
+  
 });
 
 router.get('/:id', function (req, res, next) {

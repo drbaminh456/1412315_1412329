@@ -106,12 +106,18 @@ exports.LoadSubCategoryList = () => {
     return db.load(sql);
 }
 
-exports.Search = searchphrase  => {
-    var sql = `select * 
-                from news 
-                where match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)'
-                order by RAND()
-                limit 3`;
+exports.SearchFTS = searchphrase  => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
+                from news N, account A
+                where N.Writer_ID = A.account_id and match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)
+                order by N.Date DESC`;
+    return db.load(sql);
+}
+
+exports.CountSearchResult = searchphrase  => {
+    var sql = `select Count(news_id)
+                        from news
+                        where match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)`;
     return db.load(sql);
 }
 
