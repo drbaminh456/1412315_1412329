@@ -106,5 +106,13 @@ exports.LoadSubCategoryList = () => {
     return db.load(sql);
 }
 
+exports.Search = searchphrase  => {
+    var sql = `select * 
+                from news 
+                where match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)'
+                order by RAND()
+                limit 3`;
+    return db.load(sql);
+}
 
 

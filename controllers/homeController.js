@@ -87,8 +87,6 @@ router.get('/category', (req, res) => {
     layout: 'page.handlebars'
   };
     res.render('page/category', vm);
-    console.log(vm);
-    
 
 });
 
