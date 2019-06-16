@@ -97,4 +97,24 @@ router.get('/logout', (req, res) => {
   };
   res.render('log/logout', vm);
 });
+
+router.post('/writer/post-news', (req, res) => {
+  // var editor = document.getElementById('editor');
+  
+  console.log(req.body);
+  
+  var obj = {
+    title: req.body.title,
+    subCategory: req.body.category,
+    tag: req.body.tag,
+    summary: req.body.summary
+    // content: req.body.
+  };
+  console.log(obj);
+  
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/writer', vm);
+});
 module.exports = router;
