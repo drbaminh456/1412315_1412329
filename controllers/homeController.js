@@ -191,6 +191,18 @@ router.post('/', (req, res) => {
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         res.render('home/home', vm);
+      } else if (rows[0].account_type === 'writer') {
+        var vm = {
+          name: req.body.email,
+          layout: 'log.handlebars'
+        }
+        req.session.isLogged = true;
+        req.session.email = rows[0].email;
+        req.session.idAccount = rows[0].account_id;
+        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.birthDate = formatDate(rows[0].birthdate);
+        req.session.role = rows[0].account_type;
+        res.render('log/writer', vm);
 
       }
     } else {
