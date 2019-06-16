@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var SHA256 = require('crypto-js/sha256');
 var accountRepo = require('../repos/accountRepo');
-
+var newsRepo = require('../repos/newsRepo'); 
 router.get('/login', (req, res) => {
   var vm = {
     layout: 'log.handlebars'
@@ -99,19 +99,17 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/writer/post-news', (req, res) => {
-  // var editor = document.getElementById('editor');
-  
-  console.log(req.body);
-  
   var obj = {
     title: req.body.title,
     subCategory: req.body.category,
+    // date: new Date(),
     tag: req.body.tag,
-    summary: req.body.summary
-    // content: req.body.
+    summary: req.body.summary,
+    content: req.body.editor
   };
   console.log(obj);
   
+  newsRepo.saveNews(obj);
   var vm = {
     layout: 'log.handlebars'
   };

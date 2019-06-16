@@ -115,4 +115,8 @@ exports.Search = searchphrase  => {
     return db.load(sql);
 }
 
-
+exports.saveNews = obj =>{
+    var sql = `insert into news(Title, Summary,	Content, Date, Status, Premium) values
+    ('${obj.title}', '${obj.summary}', '${obj.content}', 'Not yet approved', '0')`;
+    return db.save(sql);
+}

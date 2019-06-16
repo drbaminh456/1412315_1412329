@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
-                            <div id="editor"></div>
+                            <textarea id="editor" name="editor" style="width: 100%;"></textarea>
                         </div>
                         {{!-- <div class="col-12 col-md-12 mt-50" id="editor"></div> --}}
                         <div class="col-12">
@@ -51,3 +51,8 @@
     </div>
 </div>
 </section>
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
