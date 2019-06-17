@@ -7,8 +7,8 @@
                     <!-- Catagory Area -->
 
                     <div class="world-catagory-area">
-                        
-                        <h2 class="title mb-70">Articles in Category: {{category}}</h2>              
+
+                        <h2 class="title mb-70">Articles in Category: {{category}}</h2>
                         <ul id="myList">
                             {{#each newsS}}
                             <li style="display: none">
@@ -34,11 +34,36 @@
                             {{/each}}
                         </ul>
 
+                        <ul class="pagination pagination_type1">
+                            <li class="pagination__item">
+                                <a href="?page={{pageb}}" class="pagination__number">←
+                                    <span class="pagination__control pagination__control_prev">prev</span>
+                                </a>
+                            </li>
+                            {{#each page_numbers}}
+                            {{#if isCurPage}}
+                            <li class="pagination__item"><a href="?page={{value}}">
+                                    <span class="pagination__number pagination__number_active">{{value}}</span></a>
+                            </li>
+                            {{else}}
+                            <li class="pagination__item"><a href="?page={{value}}">
+                                    <span class="pagination__number pagination__number_active">{{value}}</span></a>
+                            </li>
+                            {{/if}}
+                            {{/each}}
+                            <li class="pagination__item">
+                                <a href="?page={{pagea}}" class="pagination__number">
+                                    <span class="pagination__control pagination__control_next">next</span>→</a>
+                            </li>
+                        </ul>
                         <!-- Load More btn -->
                         <div class="row">
                             <div class="col-12">
-                                <div class="load-more-btn mt-50 text-center">
-                                    <a class="btn world-btn" id="loadMore">Load More</a>
+                                <div class="load-more-btn mt-50 text-center float-left">
+                                    <a class="btn world-btn" id="loadLess">Previous Page</a>
+                                </div>
+                                <div class="load-more-btn mt-50 text-center float-right">
+                                    <a class="btn world-btn" id="loadMore">Next Page</a>
                                 </div>
                             </div>
                         </div>
@@ -125,14 +150,18 @@
     $(document).ready(function () {
         size_li = $("#myList li").size();
 
-        x = 3;
+        x = 9;
         $('#myList li:lt(' + x + ')').show();
         //$('#myList li:lt(' + (size_li - x) + ')').hide();
         //console.log($('#myList li:lt(' + x + ')'))
         $('#loadMore').click(function () {
-            x = (x + 6 <= size_li) ? x + 6 : size_li;
+            x = (x + 5 <= size_li) ? x + 5 : size_li;
             $('#myList li:lt(' + x + ')').show();
             x == size_li ? $('#loadMore').hide() : void (0);
+        });
+        $('#loadLess').click(function () {
+            x = (x - 5 < 0) ? 9 : x - 5;
+            $('#myList li').not(':lt(' + x + ')').hide();
         });
     }); 
 </script>
