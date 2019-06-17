@@ -109,6 +109,24 @@ router.get('/news-search/bytag/:tag', (req, res) => {
 
 });
 
+router.get('/news-search/bysubcat/:subcat', (req, res) => {
+  var subcat = req.params.subcat;
+  var t1 = newsRepo.SearchSameSubcat(subcat);
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadRandStories();
+  Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+    var vm = {
+      subcat: req.params.subcat,
+      newsS: news,
+      topStoS: topSto,
+      ranStoS: ranSto,
+      layout: 'page.handlebars',
+    };
+    res.render('page/subcat', vm);
+  })
+
+});
+
 router.post('/searchresult', (req, res) => {
   var Searchphrase = req.body.search;
   var t1 = newsRepo.SearchFTS(Searchphrase);
@@ -134,9 +152,10 @@ router.post('/searchresult', (req, res) => {
 router.get('/:id', function (req, res, next) {
   var newsid = req.params.id;
   newsRepo.single(newsid).then(rows => {
+
     newsRepo.updateView(newsid, rows[0].Views + 1);
 
-    var t1 = newsRepo.singlePage(rows[0].news_id);
+    var t1 = newsRepo.singlePage(newsid);
     var t2 = newsRepo.LoadTag(rows[0].news_id);
     var t3 = newsRepo.LoadRandSameCategory(rows[0].news_id);
     var t4 = newsRepo.LoadRandSameCategory(rows[0].news_id);
@@ -153,6 +172,7 @@ router.get('/:id', function (req, res, next) {
         ranStoS: ranSto,
         layout: 'page.handlebars',
       };
+      
       res.render('page/page', vm);
     });
   });
