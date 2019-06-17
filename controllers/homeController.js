@@ -127,6 +127,24 @@ router.get('/news-search/bysubcat/:subcat', (req, res) => {
 
 });
 
+router.get('/news-search/bycat/:category', (req, res) => {
+  var category = req.params.category;
+  var t1 = newsRepo.SearchSameCategory(category);
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadRandStories();
+  Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+    var vm = {
+      category: req.params.category,
+      newsS: news,
+      topStoS: topSto,
+      ranStoS: ranSto,
+      layout: 'page.handlebars',
+    };
+    res.render('page/category', vm);
+  })
+
+});
+
 router.post('/searchresult', (req, res) => {
   var Searchphrase = req.body.search;
   var t1 = newsRepo.SearchFTS(Searchphrase);
