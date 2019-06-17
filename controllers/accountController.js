@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var SHA256 = require('crypto-js/sha256');
 var accountRepo = require('../repos/accountRepo');
-var newsRepo = require('../repos/newsRepo'); 
+var newsRepo = require('../repos/newsRepo');
 router.get('/login', (req, res) => {
   var vm = {
     layout: 'log.handlebars'
@@ -74,7 +74,7 @@ router.post('/change-password', (req, res) => {
         };
         res.render('log/change-password', vm);
       }
-    } else if (rows[0].password != obj.oldPassword){
+    } else if (rows[0].password != obj.oldPassword) {
       var vm = {
         layout: 'log.handlebars',
         isSuccess: false
@@ -99,16 +99,22 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/writer/post-news', (req, res) => {
+
+  var date = new Date();
+  var month = date.getMonth().length < 2 ? ('0' + date.getMonth()) : date.getMonth();
+  var day = date.getDate().length < 2 ? ('0' + date.getDate()) : date.getDate();
+  var temp = date.getFullYear() + '-' + month + '-' + day;
+
   var obj = {
     title: req.body.title,
     subCategory: req.body.category,
-    // date: new Date(),
+    date: temp,
     tag: req.body.tag,
     summary: req.body.summary,
+    writerId: req.session.idAccount,
     content: req.body.editor
   };
-  console.log(obj);
-  
+
   newsRepo.saveNews(obj);
   var vm = {
     layout: 'log.handlebars'
