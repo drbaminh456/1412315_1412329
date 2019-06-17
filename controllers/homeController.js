@@ -3,6 +3,7 @@ var router = express.Router();
 var newsRepo = require('../repos/newsRepo');
 var accountRepo = require('../repos/accountRepo');
 var SHA256 = require('crypto-js/sha256');
+var config = require('../config/config')
 
 function formatDate(date) {
   var monthNames = [
@@ -127,13 +128,81 @@ router.get('/news-search/bysubcat/:subcat', (req, res) => {
 
 });
 
+// router.get('/news-search/bycat/:category', (req, res) => {
+//   var category = req.params.category;
+//   var t1 = newsRepo.SearchSameCategory(category);
+//   var t2 = newsRepo.LoadTopStories();
+//   var t3 = newsRepo.LoadRandStories();
+//   Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+//     var vm = {
+//       category: req.params.category,
+//       newsS: news,
+//       topStoS: topSto,
+//       ranStoS: ranSto,
+//       layout: 'page.handlebars',
+//     };
+//     res.render('page/category', vm);
+//   })
+
+// });
+
+router.get('/news-search/bycat/:category', (req, res) => {
+  var category = req.params.category;
+  var page = req.query.page;
+  if (!page) {
+    page = 1;
+  }
+  if (page <= 1)
+    var pageb = 1;
+  else
+    var pageb = page - 1;
+  var pagea = +page + 1;
+  var offset = (page - 1) * config.Limit;
+  
+  var t1 = newsRepo.SearchSameCategoryWithPagination(category, offset);
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadRandStories();
+  var t4 = newsRepo.CountSameCategory(category);
+  console.log(t1);
+  console.log(t2);
+  console.log(t3);
+  console.log(t4);
+  Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto, countRows]) => {
+    var total = countRows[0].total;
+    var nPages = total / config.Limit;
+    if (total % config.Limit > 0) {
+      nPages++;
+    }
+    if (page === total)
+      pagea = total;
+    var numbers = [];
+    for (i = 1; i <= nPages; i++) {
+      numbers.push({
+        value: i,
+        isCurPage: i === +page
+      });
+    }
+    var vm = {
+      category: req.params.category,
+      newsS: news,
+      topStoS: topSto,
+      ranStoS: ranSto,
+      page_numbers:numbers,
+      pageb: pageb,
+      pagea: pagea,
+      layout: 'page.handlebars',
+    };
+    res.render('page/category', vm);
+  })
+
+});
+
 router.post('/searchresult', (req, res) => {
   var Searchphrase = req.body.search;
   var t1 = newsRepo.SearchFTS(Searchphrase);
   var t2 = newsRepo.LoadTopStories();
   var t3 = newsRepo.LoadRandStories();
   var t4 = newsRepo.CountSearchResult(Searchphrase);
-  var object;
   Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto]) => {
     var vm = {
       Phrase: Searchphrase,
@@ -146,7 +215,7 @@ router.post('/searchresult', (req, res) => {
     };
     res.render('page/searchresult', vm);
   })
-  
+
 });
 
 router.get('/:id', function (req, res, next) {
@@ -172,7 +241,7 @@ router.get('/:id', function (req, res, next) {
         ranStoS: ranSto,
         layout: 'page.handlebars',
       };
-      
+
       res.render('page/page', vm);
     });
   });

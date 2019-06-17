@@ -1,4 +1,5 @@
 var db = require('../fn/db');
+var config = require('../config/config')
 // var config = require('../config/config');
 
 // exports.singlePage = news => {
@@ -115,16 +116,16 @@ exports.updateView = (id, view) => {
     return db.save(sql);
 }
 
-exports.SearchSameCategory = categoryname => {
-    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, C.cat_name
-                from news N, sub_category S, category C, account A
-                where N.Subcat_ID = S.id
-                    and S.parentCategoryId = C.category_id
-                    and C.cat_name = '${categoryname}'
-                    and N.Writer_ID = A.account_id
-                order by N.Date DESC`;
-    return db.load(sql);
-}
+// exports.SearchSameCategory = categoryname => {
+//     var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, C.cat_name
+//                 from news N, sub_category S, category C, account A
+//                 where C.cat_name = '${categoryname}'
+//                 and S.parentCategoryId = C.category_id
+//                     and N.Subcat_ID = S.id                
+//                     and N.Writer_ID = A.account_id
+//                 order by N.Date DESC`;
+//     return db.load(sql);
+// }
 
 exports.SearchSameSubcat = subcategoryname => {
     var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
@@ -179,19 +180,6 @@ exports.SearchSameTag = tagname => {
     return db.load(sql);
 }
 
-// exports.SearchSameTag = tagname => {
-//     var sql = `select N1.news_id, N1.Title, N1.Summary, DATE_FORMAT(N1.Date, "%b %e, %Y") AS Date, S1.subcat_name, A.last_name, A.first_name, A.nickname, N1.Thumbnail_image, T.Tag_Name
-//                 from news N1, news_subcategory NS1, sub_category S1, category C1, account A, tag T, news_tag NT
-//                 where N1.news_id = NS1.News_ID and NS1.Subcategory_ID = S1.id
-//                     and S1.parentCategoryId = C1.category_id
-//                     and N1.news_id = NT.News_ID and NT.Tag_ID = T.Tag_ID
-//                     and N1.Writer_ID = A.account_id
-//                     and T.Tag_Name = '${tagname}'
-//                 order by RAND()
-//                 limit 3`;
-//     return db.load(sql);
-// }
-
 exports.LoadCategoryList = () => {
     var sql = `select category_id, cat_name
                 from category
@@ -227,4 +215,30 @@ exports.saveNews = obj => {
     var sql = `insert IGNORE  into news(Title, Summary,	Content, Writer_ID, Date, Status, Premium) values
     ('${obj.title}', '${obj.summary}', '${obj.content}', '${obj.date}', '${obj.writerId}', 'Not yet approved', '0')`;
     return db.save(sql);
+}
+
+exports.SearchSameCategoryWithPagination = (categoryname, offset) => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, C.cat_name
+                from news N, sub_category S, category C, account A
+                where C.cat_name = '${categoryname}'
+                and S.parentCategoryId = C.category_id
+                    and N.Subcat_ID = S.id                
+                    and N.Writer_ID = A.account_id
+                order by N.Date DESC
+                limit ${config.Limit}
+                offset ${offset}`;
+    return db.load(sql);
+}
+
+exports.CountSameCategory = categoryname => {
+    var sql = `select count(*) as total
+                from (select *
+                    from news N, sub_category S, category C, account A
+                    where C.cat_name = '${categoryname}'
+                    and S.parentCategoryId = C.category_id
+                        and N.Subcat_ID = S.id                
+                        and N.Writer_ID = A.account_id) A`;
+
+                        
+    return db.load(sql);
 }
