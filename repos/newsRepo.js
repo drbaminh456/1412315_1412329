@@ -30,7 +30,7 @@ exports.LoadTag = news => {
     return db.load(sql);
 }
 
-exports.LoadRandSameCategory = news  => {
+exports.LoadRandSameCategory = news => {
     var sql = `select N2.news_id, N2.Title, N2.Summary, DATE_FORMAT(N2.Date, "%b %e, %Y") AS Date, S2.subcat_name, A.last_name, A.first_name, A.nickname, N2.Thumbnail_image
                 from news N1, news_subcategory NS1, sub_category S1, category C1, news N2, news_subcategory NS2, sub_category S2, category C2, account A
                 where N1.news_id = '${news}' and NS1.News_ID = N1.news_id and S1.id = NS1.Subcategory_ID
@@ -65,7 +65,7 @@ exports.updateView = (id, view) => {
     return db.save(sql);
 }
 
-exports.SearchSameCategory = categoryname  => {
+exports.SearchSameCategory = categoryname => {
     var sql = `select N1.news_id, N1.Title, N1.Summary, DATE_FORMAT(N1.Date, "%b %e, %Y") AS Date, S1.subcat_name, A.last_name, A.first_name, A.nickname, N1.Thumbnail_image
                 from news N1, news_subcategory NS1, sub_category S1, category C1, account A
                 where N1.news_id = NS1.News_ID and NS1.Subcategory_ID = S1.id
@@ -77,7 +77,7 @@ exports.SearchSameCategory = categoryname  => {
     return db.load(sql);
 }
 
-exports.SearchSameTag = tagname  => {
+exports.SearchSameTag = tagname => {
     var sql = `select N1.news_id, N1.Title, N1.Summary, DATE_FORMAT(N1.Date, "%b %e, %Y") AS Date, S1.subcat_name, A.last_name, A.first_name, A.nickname, N1.Thumbnail_image, T.Tag_Name
                 from news N1, news_subcategory NS1, sub_category S1, category C1, account A, tag T, news_tag NT
                 where N1.news_id = NS1.News_ID and NS1.Subcategory_ID = S1.id
@@ -106,7 +106,7 @@ exports.LoadSubCategoryList = () => {
     return db.load(sql);
 }
 
-exports.SearchFTS = searchphrase  => {
+exports.SearchFTS = searchphrase => {
     var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
                 from news N, account A
                 where N.Writer_ID = A.account_id and match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)
@@ -114,15 +114,15 @@ exports.SearchFTS = searchphrase  => {
     return db.load(sql);
 }
 
-exports.CountSearchResult = searchphrase  => {
+exports.CountSearchResult = searchphrase => {
     var sql = `select Count(news_id)
                         from news
                         where match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)`;
     return db.load(sql);
 }
 
-exports.saveNews = obj =>{
-    var sql = `insert into news(Title, Summary,	Content, Date, Status, Premium) values
-    ('${obj.title}', '${obj.summary}', '${obj.content}', 'Not yet approved', '0')`;
+exports.saveNews = obj => {
+    var sql = `insert IGNORE  into news(Title, Summary,	Content, Writer_ID, Date, Status, Premium) values
+    ('${obj.title}', '${obj.summary}', '${obj.content}', '${obj.date}', '${obj.writerId}', 'Not yet approved', '0')`;
     return db.save(sql);
 }
