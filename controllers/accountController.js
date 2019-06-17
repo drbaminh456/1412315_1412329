@@ -45,9 +45,11 @@ router.get('/my-profile', (req, res) => {
     name: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.name : 'Please login to show',
     birthDate: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.birthDate : 'Please login to show',
     accountType: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.role : 'Please login to show',
-    isWriter: req.session.accoutnType == 'writer' ? true : false,
+    nickname: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.nickname : 'Please login to show',
+    isWriter: req.session.role === 'writer' ? true : false,
     layout: 'log.handlebars'
   };
+
   res.render('log/my-profile', vm);
 });
 
@@ -82,10 +84,6 @@ router.post('/change-password', (req, res) => {
       res.render('log/change-password', vm);
     }
   });
-  // var vm = {
-  //   layout: 'log.handlebars'
-  // };
-  // res.render('log/change-password-success', vm);
 });
 router.get('/logout', (req, res) => {
   if (req.session.isLogged == true) {
@@ -120,5 +118,22 @@ router.post('/writer/post-news', (req, res) => {
     layout: 'log.handlebars'
   };
   res.render('log/writer', vm);
+});
+router.post('/change-infor', (req, res) => {
+  var temp = req.body.name.split(' ');
+  var firstName = temp[0];
+  var lastName = '';
+  temp.forEach(e => {
+    lastName += e + ' ';
+  });
+  lastName = lastName.substring(0, lastName.length - 1);
+  var obj = {
+    firstname: firstName,
+    lastname: lastName,
+    birthDate: req.body.birth,
+    nickname: req.body.nickname
+  };
+  console.log(obj);
+
 });
 module.exports = router;

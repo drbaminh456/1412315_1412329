@@ -8,64 +8,73 @@
         <strong>Details</strong>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        <label>Họ tên: </label>
+        <form action="/account/change-infor" method="post">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label>Họ tên: </label>
+                        </div>
+                        <div class="col-md-7">
+                            <span id="name">{{name}}</span>
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <span>{{name}}</span>
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label>Email: </label>
+                        </div>
+                        <div class="col-md-7">
+                            <span id="email">{{email}}</span>
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label>Chức vụ: </label>
+                        </div>
+                        <div class="col-md-7">
+                            <span>{{accountType}}</span>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        <label>Email: </label>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label>Ngày tháng năm sinh: </label>
+                        </div>
+                        <div class="col-md-7">
+                            <span id="birth">{{birthDate}}</span>
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <span>{{email}}</span>
+                    {{#if isWriter}}
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <label>Bút danh:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <span id="nickname">{{nickname}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        <label>Chức vụ: </label>
-                    </div>
-                    <div class="col-md-7">
-                        <span>{{accountType}}</span>
-                    </div>
+                    {{/if}}
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        <label>Ngày tháng năm sinh: </label>
-                    </div>
-                    <div class="col-md-7">
-                        <span>{{birthDate}}</span>
-                    </div>
+            <div class="form-group row">
+                <div class="col-md-4">
                 </div>
-                {{#if isWriter}}
-                <div class="form-group row">
-                    <div class="col-md-5">
-                        <label>Bút danh:</label>
-                    </div>
-                    <div class="col-md-7">
-                        <span>{{accountType}}</span>
-                    </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" type="button" id="changePassword">Change Password</button>
                 </div>
-                {{/if}}
+                <div class="col-md-2">
+                    <button class="btn btn-primary" type="button" id="editInfo" onclick="change()">Edit</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    {{!-- <input type="button" class="btn btn-primary" onclick="myFunction()"
+                    value="Submit"> --}}
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary" type="button" id="changePassword">Change Password</button>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-primary" type="button" id="editInfo">Edit</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 <div id="myModal" class="modal">
@@ -108,5 +117,20 @@
             </form>
         </div>
     </div>
-
 </div>
+<script>
+    function change() {
+        var name = $("#name").text();
+        $("#name").replaceWith("<input type='text' class='form-control' name='name' value='" + name + " ' style='width: 100%' />")
+
+        //var email = $("#email").text();
+        //$("#email").replaceWith("<input type='text' class='form-control' name='email' value='" + email + " ' style='width: 100%' />")
+
+        var name = $("#birth").text();
+        $("#birth").replaceWith("<input type='text' class='form-control' name='birth' placeholder='yyyy-MM-dd' value='" + birth + " ' style='width: 100%' />")
+
+        var nickname = $("#nickname").text();
+
+        $("#nickname").replaceWith("<input type='text' class='form-control' name='nickname' value='" + nickname + " ' style='width: 100%' />")
+    }
+</script>

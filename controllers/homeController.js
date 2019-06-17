@@ -16,12 +16,14 @@ function formatDate(date) {
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
+
+
   } else {
     var day = '';
     var monthIndex = '';
     var year = '';
+    return null;
   }
-
 
   return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
@@ -158,7 +160,7 @@ router.get('/news-search/bycat/:category', (req, res) => {
     var pageb = page - 1;
   var pagea = +page + 1;
   var offset = (page - 1) * config.Limit;
-  
+
   var t1 = newsRepo.SearchSameCategoryWithPagination(category, offset);
   var t2 = newsRepo.LoadTopStories();
   var t3 = newsRepo.LoadRandStories();
@@ -184,7 +186,7 @@ router.get('/news-search/bycat/:category', (req, res) => {
       newsS: news,
       topStoS: topSto,
       ranStoS: ranSto,
-      page_numbers:numbers,
+      page_numbers: numbers,
       pageb: pageb,
       pagea: pagea,
       layout: 'page.handlebars',
@@ -288,8 +290,8 @@ router.post('/', (req, res) => {
         req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
+        req.session.nickname = rows[0].nickname;
         res.render('log/writer', vm);
-
       }
     } else {
       var vm = {
