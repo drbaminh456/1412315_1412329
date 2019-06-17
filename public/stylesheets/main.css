@@ -275,3 +275,69 @@ min-width: 100px;
 .modal form label {
 font-weight: normal;
 }	
+
+.pagination {
+  --uiPaginationItemPadding: var(--paginationItemPadding, 5px 8px);
+  --uiPaginationItemBorderRadius: var(--paginationItemBorderRadius);
+  --uiPaginationItemTextColor: var(--paginationItemTextColor, inherit);
+  --uiPaginationItemActiveTextColor: var(--paginationItemActiveTextColor);
+  --uiPaginationItemActiveBgColor: var(--paginationItemActiveBgColor);
+  --uiPaginationItemActiveBorderColor: var(--paginationItemActiveBorderColor, transparent);
+  --uiPaginationItemFontWeight: var(--paginationItemFontWeight, 700);
+  --uiPaginationArrowIndent: var(--paginationArrowIndent, 4px);
+  padding-left: 0;
+  margin-top: 10px;
+  margin-bottom: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pagination__number_active {
+  font-weight: var(--uiPaginationItemFontWeight);
+}
+
+.pagination__control_prev {
+  margin-left: var(--uiPaginationArrowIndent);
+}
+
+.pagination__control_next {
+  margin-right: var(--uiPaginationArrowIndent);
+}
+
+.pagination__number {
+  display: inline-block;
+  line-height: 1;
+  padding: var(--uiPaginationItemPadding);
+  border: 2px solid transparent;
+  border-radius: var(--uiPaginationItemBorderRadius);
+  text-decoration: none;
+  color: var(--uiPaginationItemTextColor);
+}
+
+.pagination__number:focus {
+  outline-color: var(--uiPaginationItemActiveBgColor);
+}
+
+.pagination__number_active {
+  border-color: var(--uiPaginationItemActiveBorderColor);
+  background-color: var(--uiPaginationItemActiveBgColor);
+  color: var(--uiPaginationItemActiveTextColor);
+}
+
+
+/*
+* demo styles for pagination
+*/
+
+.pagination {
+  --paginationItemActiveBgColor: #4557bb;
+  --paginationItemTextColor: #0094d9;
+  --paginationItemActiveTextColor: #fff;
+  justify-content: center;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}

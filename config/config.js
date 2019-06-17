@@ -1,4 +1,4 @@
 module.exports = {
     nameuser: 'admin',
-    Limit: 1
+    Limit: 8
 }

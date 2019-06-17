@@ -163,10 +163,7 @@ router.get('/news-search/bycat/:category', (req, res) => {
   var t2 = newsRepo.LoadTopStories();
   var t3 = newsRepo.LoadRandStories();
   var t4 = newsRepo.CountSameCategory(category);
-  console.log(t1);
-  console.log(t2);
-  console.log(t3);
-  console.log(t4);
+
   Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto, countRows]) => {
     var total = countRows[0].total;
     var nPages = total / config.Limit;
