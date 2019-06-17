@@ -242,3 +242,49 @@ exports.CountSameCategory = categoryname => {
                         
     return db.load(sql);
 }
+
+exports.LoadTop3StoriesLastWeek = () => {
+    var sql = `select N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname, C.cat_name
+                from news N, account A, sub_category S, category C
+                where N.Writer_ID = A.account_id
+                    and N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                    and N.Date >= Date(NOW()) - INTERVAL 7 DAY
+                order by Views DESC
+                limit 3`;
+    return db.load(sql);
+}
+
+exports.LoadAllLatestNews = () => {
+    var sql = `select N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname, C.cat_name
+                from news N, account A, sub_category S, category C
+                where N.Writer_ID = A.account_id
+                    and N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                order by N.Date DESC`;
+    return db.load(sql);
+}
+
+exports.Latest10InCategory = (category) => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
+                from news N, sub_category S, account A, category C
+                where N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                    and N.Writer_ID = A.account_id
+                    and C.cat_name = '${category}'
+                order by N.Date DESC
+                limit 10`;
+    return db.load(sql);
+}
+
+exports.LatestTopViewsInCategory = (category) => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, S.subcat_name
+                from news N, sub_category S, account A, category C
+                where N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                    and N.Writer_ID = A.account_id
+                    and C.cat_name = '${category}'
+                order by N.Views DESC
+                limit 1`;
+    return db.load(sql);
+}

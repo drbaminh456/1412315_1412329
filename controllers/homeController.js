@@ -45,12 +45,58 @@ function formatDate(date) {
 //#endregion
 
 /* GET home page. */
+// router.get('/', (req, res) => {
+//   var vm = {
+//     layout: 'main.handlebars'
+//   };
+//   res.render('home/home', vm);
+// });
+
 router.get('/', (req, res) => {
-  var vm = {
-    layout: 'main.handlebars'
-  };
-  res.render('home/home', vm);
+  var t1 = newsRepo.LoadRandStories();
+  var t2 = newsRepo.LoadTopStories();
+  var t3 = newsRepo.LoadTop3StoriesLastWeek();
+  var t4 = newsRepo.LoadAllLatestNews();
+  var ta = newsRepo.Latest10InCategory('Kinh doanh');//-----> can't figure out how to get this phrase from tab content, so this is how we'll go
+  var tb = newsRepo.Latest10InCategory('Thế giới');
+  var tc = newsRepo.Latest10InCategory('Văn hóa - Xã hội');
+  var td = newsRepo.Latest10InCategory('Đời sống');
+  var te = newsRepo.Latest10InCategory('Thể thao');
+  var tf = newsRepo.Latest10InCategory('Giáo dục');
+  var ta1 = newsRepo.LatestTopViewsInCategory('Kinh doanh');
+  var tb1 = newsRepo.LatestTopViewsInCategory('Thế giới');
+  var tc1 = newsRepo.LatestTopViewsInCategory('Văn hóa - Xã hội');
+  var td1 = newsRepo.LatestTopViewsInCategory('Đời sống');
+  var te1 = newsRepo.LatestTopViewsInCategory('Thể thao');
+  var tf1 = newsRepo.LatestTopViewsInCategory('Giáo dục');
+
+  Promise.all([t1,t2, t3, t4, ta, tb, tc, td, te, tf, ta1, tb1, tc1, td1, te1, tf1]).then(([ranSto, topSto, top3, allLatest, kinhDoanh2, theGioi2, VHXH2, doiSong2, theThao2, giaoDuc2, kinhDoanh1, theGioi1, VHXH1, doiSong1, theThao1, giaoDuc1]) => {
+    var vm = {
+      ranStoS: ranSto,
+      topStoS: topSto,
+      top3S: top3,
+      allLatestS: allLatest,
+      kinhDoanh2S: kinhDoanh2,
+      theGioi2S: theGioi2,
+      VHXH2S: VHXH2,
+      doiSong2S:doiSong2,
+      theThao2S: theThao2,
+      giaoDuc2S: giaoDuc2,
+      kinhDoanh1S: kinhDoanh1,
+      theGioi1S: theGioi1,
+      VHXH1S: VHXH1,
+      doiSong1S:doiSong1,
+      theThao1S: theThao1,
+      giaoDuc1S: giaoDuc1,
+      layout: 'main.handlebars'
+    };
+    
+    res.render('home/home', vm);
+  })
+  
 });
+
+
 router.get('/logout', (req, res) => {
   if (req.session.isLogged == true) {
     req.session.isLogged == false;
