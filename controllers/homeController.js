@@ -6,11 +6,13 @@ var SHA256 = require('crypto-js/sha256');
 var config = require('../config/config')
 
 function formatDate(date) {
+  console.log(typeof(date));
+   
   var monthNames = [
-    "Jan", "Feb", "Mar",
-    "Apr", "May", "Jun", "Jul",
-    "Aug", "Sep", "Oct",
-    "Nov", "Dec"
+    "01", "02", "03",
+    "06", "05", "06", "07",
+    "08", "09", "10",
+    "11", "12"
   ];
   if (date != null) {
     var day = date.getDate();
@@ -309,7 +311,8 @@ router.post('/', (req, res) => {
         req.session.isLogged = true;
         req.session.email = rows[0].email;
         req.session.idAccount = rows[0].account_id;
-        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.firstname = rows[0].first_name;
+        req.session.lastname = rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         res.render('log/admin', vm);
@@ -321,7 +324,8 @@ router.post('/', (req, res) => {
         req.session.isLogged = true;
         req.session.email = rows[0].email;
         req.session.idAccount = rows[0].account_id;
-        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.firstname = rows[0].first_name;
+        req.session.lastname = rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         res.render('home/home', vm);
@@ -333,7 +337,8 @@ router.post('/', (req, res) => {
         req.session.isLogged = true;
         req.session.email = rows[0].email;
         req.session.idAccount = rows[0].account_id;
-        req.session.name = rows[0].first_name + ' ' + rows[0].last_name;
+        req.session.firstname = rows[0].first_name;
+        req.session.lastname = rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         req.session.nickname = rows[0].nickname;

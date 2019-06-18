@@ -42,7 +42,8 @@ router.get('/writer', (req, res) => {
 router.get('/my-profile', (req, res) => {
   var vm = {
     email: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.email : 'Please login to show',
-    name: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.name : 'Please login to show',
+    firstName: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.firstname : 'Please login to show',
+    lastName: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.lastname : 'Please login to show',
     birthDate: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.birthDate : 'Please login to show',
     accountType: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.role : 'Please login to show',
     nickname: (req.session.idAccount != '' || req.session.idAccount != NULL) ? req.session.nickname : 'Please login to show',
@@ -120,20 +121,23 @@ router.post('/writer/post-news', (req, res) => {
   res.render('log/writer', vm);
 });
 router.post('/change-infor', (req, res) => {
-  var temp = req.body.name.split(' ');
-  var firstName = temp[0];
-  var lastName = '';
-  temp.forEach(e => {
-    lastName += e + ' ';
-  });
-  lastName = lastName.substring(0, lastName.length - 1);
+
   var obj = {
-    firstname: firstName,
-    lastname: lastName,
-    birthDate: req.body.birth,
+    id: req.session.idAccount,
+    firstname: req.body.fstname,
+    lastname: req.body.lastname,
+    birthdate: req.body.birth,
     nickname: req.body.nickname
   };
-  console.log(obj);
+  accountRepo.changeInformation(obj);
+  // accountRepo.loadAll(obj).then(rows => {
+  //   console.log(rows[0]);
+    
+  //   var vm = {
+  //     layout: 'log.handlebars'
+  //   };
+  //   res.render('log/my-profile', vm);
+  // });
 
 });
 module.exports = router;

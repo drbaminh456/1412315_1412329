@@ -43,12 +43,12 @@ var sessionStore = new MySQLStore({
   database: 'newspaperdb',
   createDatabaseTable: true,
   schema: {
-      tableName: 'sessions',
-      columnNames: {
-          session_id: 'session_id',
-          expires: 'expires',
-          data: 'data'
-      }
+    tableName: 'sessions',
+    columnNames: {
+      session_id: 'session_id',
+      expires: 'expires',
+      data: 'data'
+    }
   }
 });
 
