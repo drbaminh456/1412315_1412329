@@ -241,7 +241,6 @@ router.get('/news-search/bycat/:category', (req, res) => {
     };
     res.render('page/category', vm);
   })
-
 });
 
 router.post('/searchresult', (req, res) => {
@@ -254,7 +253,6 @@ router.post('/searchresult', (req, res) => {
     var vm = {
       Phrase: Searchphrase,
       newsS: news,
-      //result: t4 == `Promise { [ RowDataPacket { 'Count(news_id)': 0 } ] }` ? false : true,
       result: news.length === 0 ? false : true,
       topStoS: topSto,
       ranStoS: ranSto,
@@ -330,11 +328,6 @@ router.post('/', (req, res) => {
         req.session.role = rows[0].account_type;
         res.render('home/home', vm);
       } else if (rows[0].account_type === 'writer') {
-        var vm = {
-          name: req.body.email,
-          news: [],
-          layout: 'log.handlebars'
-        }
         req.session.isLogged = true;
         req.session.email = rows[0].email;
         req.session.idAccount = rows[0].account_id;
@@ -347,14 +340,17 @@ router.post('/', (req, res) => {
           id: req.session.idAccount
         }
         var t1 = accountRepo.loadNews(tempObj);
-        console.log(t1);
-        
+
+
         Promise.all([t1]).then(([newS]) => {
-          vm.news = newS;
+          //vm.news = newS;
+          var vm = {
+            name: req.body.email,
+            news: newS,
+            layout: 'log.handlebars'
+          }
+          res.render('log/writer', vm);
         });
-        console.log(vm);
-        
-        res.render('log/writer', vm);
       }
     } else {
       var vm = {
@@ -364,7 +360,6 @@ router.post('/', (req, res) => {
       };
       res.render('log/login', vm);
     }
-
   });
 });
 

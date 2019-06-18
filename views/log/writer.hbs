@@ -1,3 +1,29 @@
+<style>
+    td {
+        position: relative;
+    }
+
+    .tooltiptext {
+        visibility: hidden;
+        width: fit-content;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    td:hover .tooltiptext {
+        visibility: visible;
+    }
+</style>
 <section class="contact-area section-padding-100" style="padding-top: 80px; padding-bottom: 30px;"></section>
 <div class="container">
     <div class="justify-content-center">
@@ -48,7 +74,7 @@
                         <div class="col-12 col-md-12">
                             <textarea name="editor" class="editor"></textarea>
                         </div>
-                        {{!-- <div class="col-12 col-md-12 mt-50" id="editor"></div> --}}
+                        <div class="col-12 col-md-12 mt-50" id="editor"></div>
                         <div class="col-12">
                             <button type="submit" class="btn world-btn float-right">Submit</button>
                         </div>
@@ -58,40 +84,54 @@
         </div>
         <div class="col-md-12" id="manage" class="News" style="display:none">
             <div class="contact-form" style="padding: 30px 30px;">
-                <div>
-                    <div class="container">
-                        <div class="table-wrapper">
-                            <div class="table-title">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <h2>Manage <b>News</b></h2>
-                                    </div>
-                                </div>
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Manage <b>News</b></h2>
                             </div>
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Summary</th>
-                                        <th>Date</th>
-                                        <th>Content</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each news}}
-                                    <tr>
-                                        <td>
-                                            {{Summary}}
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-
                         </div>
                     </div>
+                    <table class="table table-striped table-hover" style="font-size: smaller">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Summary</th>
+                                <th>Date</th>
+                                <th>Content</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each news}}
+                            <tr>
+                                <td>
+                                    <p class="threedot">{{Title}}</p>
+                                    <span class="tooltiptext">{{Title}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Summary}}</p>
+                                    <span class="tooltiptext">{{Summary}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Date}}</p>
+                                    <span class="tooltiptext">{{Summary}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Content}}</p>
+                                    <span class="tooltiptext">{{Content}}</span>
+                                </td>
+                                <td>
+                                    {{Status}}
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                            {{/each}}
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
