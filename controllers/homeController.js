@@ -143,8 +143,7 @@ router.get('/category', (req, res) => {
 
 
 router.get('/news-search/bytag/:tag', (req, res) => {
-  if(req.session.isLogged == true)
-  {
+  if (req.session.isLogged == true) {
     var newstags = req.params.tag;
     var t1 = newsRepo.SearchSameTagPremiumFirst(newstags);
     var t2 = newsRepo.LoadTopStories();
@@ -159,8 +158,7 @@ router.get('/news-search/bytag/:tag', (req, res) => {
       };
       res.render('page/tag', vm);
     })
-  }else
-  {
+  } else {
     var newstags = req.params.tag;
     var t1 = newsRepo.SearchSameTag(newstags);
     var t2 = newsRepo.LoadTopStories();
@@ -179,8 +177,7 @@ router.get('/news-search/bytag/:tag', (req, res) => {
 });
 
 router.get('/news-search/bysubcat/:subcat', (req, res) => {
-  if(req.session.isLogged == true)
-  {
+  if (req.session.isLogged == true) {
     var subcat = req.params.subcat;
     var t1 = newsRepo.SearchSameSubcatPremiumFirst(subcat);
     var t2 = newsRepo.LoadTopStories();
@@ -195,8 +192,7 @@ router.get('/news-search/bysubcat/:subcat', (req, res) => {
       };
       res.render('page/subcat', vm);
     })
-  } else 
-  {
+  } else {
     var subcat = req.params.subcat;
     var t1 = newsRepo.SearchSameSubcat(subcat);
     var t2 = newsRepo.LoadTopStories();
@@ -233,8 +229,7 @@ router.get('/news-search/bysubcat/:subcat', (req, res) => {
 // });
 
 router.get('/news-search/bycat/:category', (req, res) => {
-  if(req.sessionID.isLogged == true)
-  {
+  if (req.sessionID.isLogged == true) {
     var category = req.params.category;
     var page = req.query.page;
     if (!page) {
@@ -279,8 +274,7 @@ router.get('/news-search/bycat/:category', (req, res) => {
       };
       res.render('page/category', vm);
     })
-  } else
-  {
+  } else {
     var category = req.params.category;
     var page = req.query.page;
     if (!page) {
@@ -322,8 +316,7 @@ router.post('/searchresult', (req, res) => {
 
 router.get('/:id', function (req, res, next) {
   //-----> check login here
-  if(req.session.isLogged == true)
-  {
+  if (req.session.isLogged == true) {
     var account_id = req.session.idAccount;
     var newsid = req.params.id;
     newsRepo.single(newsid).then(rows => {
@@ -338,7 +331,7 @@ router.get('/:id', function (req, res, next) {
       var t6 = newsRepo.LoadRandStories();
       var t7 = accountRepo.IsExpired(account_id);
       var t8 = newsRepo.checkNotPremium(newsid);
-      
+
       Promise.all([t1, t2, t3, t4, t5, t6, t7, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, expire, Notpre]) => {
         var vm = {
           tagS: tag,
@@ -368,7 +361,7 @@ router.get('/:id', function (req, res, next) {
       var t5 = newsRepo.LoadTopStories();
       var t6 = newsRepo.LoadRandStories();
       var t8 = newsRepo.checkNotPremium(newsid);
-      
+
       Promise.all([t1, t2, t3, t4, t5, t6, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, notPre]) => {
         var vm = {
           tagS: tag,
@@ -387,8 +380,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.post('/searchresult', (req, res) => {
-  if(req.session.isLogged == true)
-  {
+  if (req.session.isLogged == true) {
     var Searchphrase = req.body.search;
     var t1 = newsRepo.SearchFTSPremiumFirst(Searchphrase);
     var t2 = newsRepo.LoadTopStories();
@@ -406,8 +398,7 @@ router.post('/searchresult', (req, res) => {
       };
       res.render('page/searchresult', vm);
     })
-  } else
-  {
+  } else {
     var Searchphrase = req.body.search;
     var t1 = newsRepo.SearchFTS(Searchphrase);
     var t2 = newsRepo.LoadTopStories();
@@ -430,8 +421,7 @@ router.post('/searchresult', (req, res) => {
 
 router.get('/:id', function (req, res, next) {
   //-----> check login here
-  if(req.session.isLogged == true)
-  {
+  if (req.session.isLogged == true) {
     var account_id = req.session.idAccount;
     var newsid = req.params.id;
     newsRepo.single(newsid).then(rows => {
@@ -446,7 +436,7 @@ router.get('/:id', function (req, res, next) {
       var t6 = newsRepo.LoadRandStories();
       var t7 = accountRepo.IsExpired(account_id);
       var t8 = newsRepo.checkNotPremium(newsid);
-      
+
       Promise.all([t1, t2, t3, t4, t5, t6, t7, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, expire, Notpre]) => {
         var vm = {
           tagS: tag,
@@ -476,7 +466,7 @@ router.get('/:id', function (req, res, next) {
       var t5 = newsRepo.LoadTopStories();
       var t6 = newsRepo.LoadRandStories();
       var t8 = newsRepo.checkNotPremium(newsid);
-      
+
       Promise.all([t1, t2, t3, t4, t5, t6, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, notPre]) => {
         var vm = {
           tagS: tag,
@@ -503,7 +493,7 @@ router.post('/', (req, res) => {
   accountRepo.login(user).then(rows => {
     if (rows.length > 0) {
       if (rows[0].account_type === 'administrator') {
-        
+
         var vm = {
           isAdmin: true,
           layout: 'log.handlebars'
@@ -515,7 +505,7 @@ router.post('/', (req, res) => {
         req.session.lastname = rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
-        
+
         var t1 = newsRepo.LoadAllEditor();
         var t2 = newsRepo.LoadAllWriter();
         var t3 = newsRepo.LoadAllSubscriber();
@@ -576,7 +566,32 @@ router.post('/', (req, res) => {
           }
           res.render('log/writer', vm);
         });
+      } else if (rows[0].account_type === 'editor') {
+        req.session.isLogged = true;
+        req.session.email = rows[0].email;
+        req.session.idAccount = rows[0].account_id;
+        req.session.firstname = rows[0].first_name;
+        req.session.lastname = rows[0].last_name;
+        req.session.birthDate = formatDate(rows[0].birthdate);
+        req.session.role = rows[0].account_type;
+        req.session.nickname = rows[0].nickname;
+        var tempObj = {
+          id: req.session.idAccount
+        }
+        var t1 = newsRepo.LoadAllNewsInEditorCategory(tempObj);
+
+        Promise.all([t1]).then(([newS]) => {
+          //vm.news = newS;
+          var vm = {
+            name: req.body.email,
+            news: newS,
+            layout: 'log.handlebars'
+          }
+
+          res.render('log/editor', vm);
+        });
       }
+
     } else {
       var vm = {
         showError: true,
@@ -589,14 +604,14 @@ router.post('/', (req, res) => {
 });
 
 router.get('/manage/Tag', (req, res) => {
-    var t1 = newsRepo.LoadTagList();
-    Promise.all([t1]).then(([tag]) => {
-      var vm = {
-        tagS: tag,
-        layout: 'page.handlebars'
-      };
-      res.render('page/category', vm);
-    })
+  var t1 = newsRepo.LoadTagList();
+  Promise.all([t1]).then(([tag]) => {
+    var vm = {
+      tagS: tag,
+      layout: 'page.handlebars'
+    };
+    res.render('page/category', vm);
+  })
 });
 
 module.exports = router;

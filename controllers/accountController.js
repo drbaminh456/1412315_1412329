@@ -138,4 +138,11 @@ router.post('/change-infor', (req, res) => {
   });
 
 });
+
+router.get('/editor', (req, res) => {
+  var vm = {
+    layout: 'log.handlebars'
+  };
+  res.render('log/editor', vm);
+});
 module.exports = router;

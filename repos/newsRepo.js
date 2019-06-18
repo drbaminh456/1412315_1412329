@@ -400,12 +400,14 @@ exports.LoadAllSubscriber = () => {
 }
 
 exports.LoadAllNewsInEditorCategory = (id) => {
-    var sql =`select distinct N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname, C.cat_name
+    var sql =`select distinct N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname as Writer, C.cat_name, S.subcat_name
                 from news N, account E, account A, sub_category S, category C, editor_category_managements EC
                 where N.Writer_ID = A.account_id
                     and N.Subcat_ID = S.id
                     and S.parentCategoryId = C.category_id
                     and C.category_id = EC.Category_ID
-                    and EC.Editor_ID = '${id}'`;
+                    and EC.Editor_ID = '${id.id}'`;
+    console.log(sql);
+    
     return db.load(sql);
 }

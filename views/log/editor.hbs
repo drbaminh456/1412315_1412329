@@ -1,0 +1,174 @@
+<style>
+    td {
+        position: relative;
+    }
+
+    .tooltiptext {
+        visibility: hidden;
+        width: fit-content;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    td:hover .tooltiptext {
+        visibility: visible;
+    }
+</style>
+<section class="contact-area section-padding-100" style="padding-top: 80px; padding-bottom: 30px;"></section>
+<div class="container">
+    <div class="justify-content-center">
+        <div>
+            <div class="w3-bar w3-black row">
+                <button class="w3-bar-item w3-button form-control" style="width: fit-content;"
+                    onclick="writerPage('manage')">Manage News</button>
+                <button class="w3-bar-item w3-button form-control" style="width: fit-content;"
+                    onclick="writerPage('post')">Edit News</button>
+            </div>
+        </div>
+        <div class="col-md-12" id="post" class="News" style="display:none">
+            <div class="contact-form" style="padding: 30px 30px;">
+                <form action="../account/writer/post-news" method="post">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="group">
+                                <input type="text" name="title" id="title" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Title</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="group">
+                                <input type="text" name="category" id="category" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Category</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="group">
+                                <input type="text" name="tag" id="tag" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Tag</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="group">
+                                <textarea name="summary" id="summary" required></textarea>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Summary</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <textarea name="editor" class="editor"></textarea>
+                        </div>
+                        <div class="col-12 col-md-12 mt-50" id="editor"></div>
+                        <div class="col-12">
+                            <button type="submit" class="btn world-btn float-right">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12" id="manage" class="News">
+            <div class="contact-form" style="padding: 30px 30px;">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Manage <b>News</b></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover" style="font-size: smaller">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">Title</th>
+                                <th class="col-md-1">Writer</th>
+                                <th class="col-md-1">Category</th>
+                                <th class="col-md-1">Subcategory</th>
+                                <th class="col-md-2">Summary</th>                  
+                                <th class="col-md-2">Date</th>
+                                <th class="col-md-2">Content</th>
+                                <th class="col-md-1">Status</th>
+                                <th class="col-md-1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each news}}
+                            <tr>
+                                <td>
+                                    <p class="threedot">{{Title}}</p>
+                                    <span class="tooltiptext">{{Title}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Writer}}</p>
+                                    <span class="tooltiptext">{{Writer}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{cat_name}}</p>
+                                    <span class="tooltiptext">{{cat_name}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{subcat_name}}</p>
+                                    <span class="tooltiptext">{{subcat_name}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Summary}}</p>
+                                    <span class="tooltiptext">{{Summary}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Date}}</p>
+                                    <span class="tooltiptext">{{Date}}</span>
+                                </td>
+                                <td>
+                                    <p class="threedot">{{Content}}</p>
+                                    <span class="tooltiptext">{{Content}}</span>
+                                </td>
+                                <td>
+                                    {{Status}}
+                                </td>
+                                <td>
+                                    <a href="#editModal" id="{{news_id}}" class="edit"><b>Edit</b></a>
+                                    <a href="#deleteModal" class="delete"><b data-toggle="tooltip"
+                                            title="Delete">Delete</b></a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script src="/stylesheets/js/jquery/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.editor').ckeditor();
+    });
+
+    function writerPage(s) {
+        if (s === 'manage') {
+            $("#manage").show();
+            $("#post").hide();
+        } else {
+            $("#manage").hide();
+            $("#post").show();
+        }
+    }
+</script>
