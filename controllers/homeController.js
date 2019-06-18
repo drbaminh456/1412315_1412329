@@ -516,12 +516,24 @@ router.post('/', (req, res) => {
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         
-        var t1 = newsRepo.LoadTagList();
-        Promise.all([t1]).then(([tag]) => {
+        var t1 = newsRepo.LoadAllEditor();
+        var t2 = newsRepo.LoadAllWriter();
+        var t3 = newsRepo.LoadAllSubscriber();
+        var t4 = newsRepo.LoadTagList();
+        var t5 = newsRepo.LoadCategoryList();
+        var t6 = newsRepo.LoadSubCategoryList();
+        var t7 = newsRepo.LoadAllNews();
+        Promise.all([t1, t2, t3, t4, t5, t6, t7]).then(([editor, writer, subscriber, tag, category, subcat, news]) => {
           //vm.news = newS;
           var vm = {
             name: req.body.email,
+            EditorS: editor,
+            WriterS: writer,
+            SubscriberS: subscriber,
             TagS: tag,
+            CatS: category,
+            SubcatS: subcat,
+            newsS: news,
             layout: 'log.handlebars'
           }
           res.render('log/admin', vm);

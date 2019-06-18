@@ -180,22 +180,6 @@ exports.SearchSameTag = tagname => {
     return db.load(sql);
 }
 
-exports.LoadCategoryList = () => {
-    var sql = `select category_id, cat_name
-                from category
-                order by category_id ASC
-                limit 6`;
-    return db.load(sql);
-}
-
-exports.LoadSubCategoryList = () => {
-    var sql = `select distinct C.category_id, C.cat_name, S.id, S.parentCategoryId, S.subcat_name
-                from category C, sub_category S
-                where C.category_id = S.parentCategoryId
-                order by C.category_id ASC`;
-    return db.load(sql);
-}
-
 exports.SearchFTS = searchphrase => {
     var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
                 from news N, account A
@@ -364,5 +348,64 @@ exports.SearchSameTagPremiumFirst = tagname => {
 exports.LoadTagList = () => {
     var sql = `select *
                 from tag`;
+    return db.load(sql);
+}
+
+exports.LoadCategoryList = () => {
+    var sql = `select distinct category_id, cat_name
+                from category
+                order by category_id ASC`;
+    return db.load(sql);
+}
+
+exports.LoadSubCategoryList = () => {
+    var sql = `select C.category_id, C.cat_name, S.id, S.parentCategoryId, S.subcat_name
+                from category C, sub_category S
+                where C.category_id = S.parentCategoryId
+                order by S.id ASC`;
+    return db.load(sql);
+}
+
+exports.LoadAllNews = () => {
+    var sql = `select N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname, C.cat_name, N.Premium, S.subcat_name, B.nickname as Editor
+                from news N, account A, sub_category S, category C, editor_category_managements EC, account B
+                where N.Writer_ID = A.account_id
+                    and N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                    and C.category_id = EC.Category_ID
+                    and EC.Editor_ID = B.account_id
+                order by N.news_id`;
+    return db.load(sql);
+}
+
+exports.LoadAllEditor = () => {
+    var sql =`select *
+                from account
+                where account_type = 'editor'`;
+    return db.load(sql);
+}
+
+exports.LoadAllWriter = () => {
+    var sql =`select *
+                from account
+                where account_type = 'writer'`;
+    return db.load(sql);
+}
+
+exports.LoadAllSubscriber = () => {
+    var sql =`select *
+                from account
+                where account_type = 'subscriber'`;
+    return db.load(sql);
+}
+
+exports.LoadAllNewsInEditorCategory = (id) => {
+    var sql =`select distinct N.news_id, N.Title, N.Summary, N.Writer_ID, N.Views, N.Thumbnail_image, DATE_FORMAT(N.Date,"%W, %M %D, %Y") as Date, N.Content, N.Status, A.nickname, C.cat_name
+                from news N, account E, account A, sub_category S, category C, editor_category_managements EC
+                where N.Writer_ID = A.account_id
+                    and N.Subcat_ID = S.id
+                    and S.parentCategoryId = C.category_id
+                    and C.category_id = EC.Category_ID
+                    and EC.Editor_ID = '${id}'`;
     return db.load(sql);
 }
