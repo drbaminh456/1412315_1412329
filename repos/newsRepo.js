@@ -360,3 +360,9 @@ exports.SearchSameTagPremiumFirst = tagname => {
     order by N.Premium DESC, N.Date DESC`;
     return db.load(sql);
 }
+
+exports.LoadTagList = () => {
+    var sql = `select *
+                from tag`;
+    return db.load(sql);
+}

@@ -509,4 +509,18 @@ router.post('/', (req, res) => {
   });
 });
 
+router.get('/manage/Tag', (req, res) => {
+    var t1 = newsRepo.LoadTagList();
+    Promise.all([t1]).then(([tag]) => {
+      var vm = {
+        tagS: tag,
+        layout: 'page.handlebars'
+      };
+      res.render('page/category', vm);
+      console.log(vm);
+  
+    })
+ 
+});
+
 module.exports = router;
