@@ -143,39 +143,75 @@ router.get('/category', (req, res) => {
 
 
 router.get('/news-search/bytag/:tag', (req, res) => {
-  var newstags = req.params.tag;
-  var t1 = newsRepo.SearchSameTag(newstags);
-  var t2 = newsRepo.LoadTopStories();
-  var t3 = newsRepo.LoadRandStories();
-  Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
-    var vm = {
-      tag: req.params.tag,
-      newsS: news,
-      topStoS: topSto,
-      ranStoS: ranSto,
-      layout: 'page.handlebars',
-    };
-    res.render('page/tag', vm);
-  })
-
+  if(req.session.isLogged == true)
+  {
+    var newstags = req.params.tag;
+    var t1 = newsRepo.SearchSameTagPremiumFirst(newstags);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        tag: req.params.tag,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars',
+      };
+      res.render('page/tag', vm);
+    })
+  }else
+  {
+    var newstags = req.params.tag;
+    var t1 = newsRepo.SearchSameTag(newstags);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        tag: req.params.tag,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars',
+      };
+      res.render('page/tag', vm);
+    })
+  }
 });
 
 router.get('/news-search/bysubcat/:subcat', (req, res) => {
-  var subcat = req.params.subcat;
-  var t1 = newsRepo.SearchSameSubcat(subcat);
-  var t2 = newsRepo.LoadTopStories();
-  var t3 = newsRepo.LoadRandStories();
-  Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
-    var vm = {
-      subcat: req.params.subcat,
-      newsS: news,
-      topStoS: topSto,
-      ranStoS: ranSto,
-      layout: 'page.handlebars',
-    };
-    res.render('page/subcat', vm);
-  })
-
+  if(req.session.isLogged == true)
+  {
+    var subcat = req.params.subcat;
+    var t1 = newsRepo.SearchSameSubcatPremiumFirst(subcat);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        subcat: req.params.subcat,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars',
+      };
+      res.render('page/subcat', vm);
+    })
+  } else 
+  {
+    var subcat = req.params.subcat;
+    var t1 = newsRepo.SearchSameSubcat(subcat);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    Promise.all([t1, t2, t3]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        subcat: req.params.subcat,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars',
+      };
+      res.render('page/subcat', vm);
+    })
+  }
 });
 
 // router.get('/news-search/bycat/:category', (req, res) => {
@@ -197,102 +233,207 @@ router.get('/news-search/bysubcat/:subcat', (req, res) => {
 // });
 
 router.get('/news-search/bycat/:category', (req, res) => {
-  var category = req.params.category;
-  var page = req.query.page;
-  if (!page) {
-    page = 1;
+  if(req.sessionID.isLogged == true)
+  {
+    var category = req.params.category;
+    var page = req.query.page;
+    if (!page) {
+      page = 1;
+    }
+    if (page <= 1)
+      var pageb = 1;
+    else
+      var pageb = page - 1;
+    var pagea = +page + 1;
+    var offset = (page - 1) * config.Limit;
+
+    var t1 = newsRepo.SearchSameCategoryWithPaginationPremiumFirst(category, offset);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    var t4 = newsRepo.CountSameCategory(category);
+
+    Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto, countRows]) => {
+      var total = countRows[0].total;
+      var nPages = total / config.Limit;
+      if (total % config.Limit > 0) {
+        nPages++;
+      }
+      if (page === total)
+        pagea = total;
+      var numbers = [];
+      for (i = 1; i <= nPages; i++) {
+        numbers.push({
+          value: i,
+          isCurPage: i === +page
+        });
+      }
+      var vm = {
+        category: req.params.category,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        page_numbers: numbers,
+        pageb: pageb,
+        pagea: pagea,
+        layout: 'page.handlebars',
+      };
+      res.render('page/category', vm);
+    })
+  } else
+  {
+    var category = req.params.category;
+    var page = req.query.page;
+    if (!page) {
+      page = 1;
+    }
+    if (page <= 1)
+      var pageb = 1;
+    else
+      var pageb = page - 1;
+    var pagea = +page + 1;
+    var offset = (page - 1) * config.Limit;
+
+    var t1 = newsRepo.SearchSameCategoryWithPagination(category, offset);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    var t4 = newsRepo.CountSameCategory(category);
+
+    Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto, countRows]) => {
+      var total = countRows[0].total;
+      var nPages = total / config.Limit;
+      if (total % config.Limit > 0) {
+        nPages++;
+      }
+      if (page === total)
+        pagea = total;
+      var numbers = [];
+      for (i = 1; i <= nPages; i++) {
+        numbers.push({
+          value: i,
+          isCurPage: i === +page
+        });
+      }
+      var vm = {
+        category: req.params.category,
+        newsS: news,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        page_numbers: numbers,
+        pageb: pageb,
+        pagea: pagea,
+        layout: 'page.handlebars',
+      };
+      res.render('page/category', vm);
+    })
   }
-  if (page <= 1)
-    var pageb = 1;
-  else
-    var pageb = page - 1;
-  var pagea = +page + 1;
-  var offset = (page - 1) * config.Limit;
-
-  var t1 = newsRepo.SearchSameCategoryWithPagination(category, offset);
-  var t2 = newsRepo.LoadTopStories();
-  var t3 = newsRepo.LoadRandStories();
-  var t4 = newsRepo.CountSameCategory(category);
-
-  Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto, countRows]) => {
-    var total = countRows[0].total;
-    var nPages = total / config.Limit;
-    if (total % config.Limit > 0) {
-      nPages++;
-    }
-    if (page === total)
-      pagea = total;
-    var numbers = [];
-    for (i = 1; i <= nPages; i++) {
-      numbers.push({
-        value: i,
-        isCurPage: i === +page
-      });
-    }
-    var vm = {
-      category: req.params.category,
-      newsS: news,
-      topStoS: topSto,
-      ranStoS: ranSto,
-      page_numbers: numbers,
-      pageb: pageb,
-      pagea: pagea,
-      layout: 'page.handlebars',
-    };
-    res.render('page/category', vm);
-  })
-
 });
 
 router.post('/searchresult', (req, res) => {
-  var Searchphrase = req.body.search;
-  var t1 = newsRepo.SearchFTS(Searchphrase);
-  var t2 = newsRepo.LoadTopStories();
-  var t3 = newsRepo.LoadRandStories();
-  var t4 = newsRepo.CountSearchResult(Searchphrase);
-  Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto]) => {
-    var vm = {
-      Phrase: Searchphrase,
-      newsS: news,
-      //result: t4 == `Promise { [ RowDataPacket { 'Count(news_id)': 0 } ] }` ? false : true,
-      result: news.length === 0 ? false : true,
-      topStoS: topSto,
-      ranStoS: ranSto,
-      layout: 'page.handlebars'
-    };
-    res.render('page/searchresult', vm);
-  })
-
+  if(req.session.isLogged == true)
+  {
+    var Searchphrase = req.body.search;
+    var t1 = newsRepo.SearchFTSPremiumFirst(Searchphrase);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    var t4 = newsRepo.CountSearchResult(Searchphrase);
+    Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        Phrase: Searchphrase,
+        newsS: news,
+        //result: t4 == `Promise { [ RowDataPacket { 'Count(news_id)': 0 } ] }` ? false : true,
+        result: news.length === 0 ? false : true,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars'
+      };
+      res.render('page/searchresult', vm);
+    })
+  } else
+  {
+    var Searchphrase = req.body.search;
+    var t1 = newsRepo.SearchFTS(Searchphrase);
+    var t2 = newsRepo.LoadTopStories();
+    var t3 = newsRepo.LoadRandStories();
+    var t4 = newsRepo.CountSearchResult(Searchphrase);
+    Promise.all([t1, t2, t3, t4]).then(([news, topSto, ranSto]) => {
+      var vm = {
+        Phrase: Searchphrase,
+        newsS: news,
+        //result: t4 == `Promise { [ RowDataPacket { 'Count(news_id)': 0 } ] }` ? false : true,
+        result: news.length === 0 ? false : true,
+        topStoS: topSto,
+        ranStoS: ranSto,
+        layout: 'page.handlebars'
+      };
+      res.render('page/searchresult', vm);
+    })
+  }
 });
 
 router.get('/:id', function (req, res, next) {
-  var newsid = req.params.id;
-  newsRepo.single(newsid).then(rows => {
+  //-----> check login here
+  if(req.session.isLogged == true)
+  {
+    var account_id = req.session.idAccount;
+    var newsid = req.params.id;
+    newsRepo.single(newsid).then(rows => {
 
-    newsRepo.updateView(newsid, rows[0].Views + 1);
+      newsRepo.updateView(newsid, rows[0].Views + 1);
 
-    var t1 = newsRepo.singlePage(newsid);
-    var t2 = newsRepo.LoadTag(rows[0].news_id);
-    var t3 = newsRepo.LoadRandSameCategory(rows[0].news_id);
-    var t4 = newsRepo.LoadRandSameCategory(rows[0].news_id);
-    var t5 = newsRepo.LoadTopStories();
-    var t6 = newsRepo.LoadRandStories();
-
-    Promise.all([t1, t2, t3, t4, t5, t6]).then(([news, tag, sameCat, AsameCat, topSto, ranSto]) => {
-      var vm = {
-        tagS: tag,
-        newsS: news,
-        sameCats: sameCat,
-        AsameCats: AsameCat,
-        topStoS: topSto,
-        ranStoS: ranSto,
-        layout: 'page.handlebars',
-      };
-
-      res.render('page/page', vm);
+      var t1 = newsRepo.singlePage(newsid);
+      var t2 = newsRepo.LoadTag(rows[0].news_id);
+      var t3 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+      var t4 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+      var t5 = newsRepo.LoadTopStories();
+      var t6 = newsRepo.LoadRandStories();
+      var t7 = accountRepo.IsExpired(account_id);
+      var t8 = newsRepo.checkNotPremium(newsid);
+      
+      Promise.all([t1, t2, t3, t4, t5, t6, t7, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, expire, Notpre]) => {
+        var vm = {
+          tagS: tag,
+          newsS: news,
+          sameCats: sameCat,
+          AsameCats: AsameCat,
+          topStoS: topSto,
+          ranStoS: ranSto,
+          Notexpired: JSON.parse(expire[0].bool),
+          NotPRE: JSON.parse(Notpre[0].bool),
+          layout: 'page.handlebars',
+        };
+        res.render('page/page', vm);
+      });
     });
-  });
+  } else //------>> if wasn't login
+  {
+    var newsid = req.params.id;
+    newsRepo.single(newsid).then(rows => {
 
+      newsRepo.updateView(newsid, rows[0].Views + 1);
+
+      var t1 = newsRepo.singlePage(newsid);
+      var t2 = newsRepo.LoadTag(rows[0].news_id);
+      var t3 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+      var t4 = newsRepo.LoadRandSameCategory(rows[0].news_id);
+      var t5 = newsRepo.LoadTopStories();
+      var t6 = newsRepo.LoadRandStories();
+      var t8 = newsRepo.checkNotPremium(newsid);
+      
+      Promise.all([t1, t2, t3, t4, t5, t6, t8]).then(([news, tag, sameCat, AsameCat, topSto, ranSto, notPre]) => {
+        var vm = {
+          tagS: tag,
+          newsS: news,
+          sameCats: sameCat,
+          AsameCats: AsameCat,
+          topStoS: topSto,
+          ranStoS: ranSto,
+          Notpremium: JSON.parse(notPre[0].bool),
+          layout: 'page.handlebars',
+        };
+        res.render('page/normalpage', vm);
+      });
+    });
+  }
 });
 
 router.post('/', (req, res) => {

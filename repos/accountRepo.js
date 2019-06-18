@@ -27,3 +27,13 @@ exports.loadAll = obj => {
     
     return db.load(sql);
 }
+
+exports.IsExpired = (id) => {
+    var sql = `select case when (A.expired_date >= Date(NOW()))
+            then 'true'
+            else 'false'
+            end as bool
+            from account A 
+            where A.account_id = '${id}'`;
+    return db.load(sql);
+}
