@@ -27,7 +27,6 @@ exports.loadAll = obj => {
 }
 exports.loadNews = obj => {
     var sql = `select * from news where Writer_ID = '${obj.id}' ORDER BY Status`;
-    console.log(sql);
     return db.load(sql);
 }
 

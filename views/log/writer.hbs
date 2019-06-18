@@ -116,7 +116,7 @@
                                 </td>
                                 <td>
                                     <p class="threedot">{{Date}}</p>
-                                    <span class="tooltiptext">{{Summary}}</span>
+                                    <span class="tooltiptext">{{Date}}</span>
                                 </td>
                                 <td>
                                     <p class="threedot">{{Content}}</p>
@@ -125,13 +125,15 @@
                                 <td>
                                     {{Status}}
                                 </td>
-                                <td>&nbsp;</td>
+                                <td>
+                                    <a href="#editModal" id="{{news_id}}" class="edit"><b>Edit</b></a>
+                                    <a href="#deleteModal" class="delete"><b data-toggle="tooltip"
+                                            title="Delete">Delete</b></a>
+                                </td>
                             </tr>
-
                             {{/each}}
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
