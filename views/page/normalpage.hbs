@@ -21,63 +21,36 @@
             <!-- ============= Post Content Area ============= -->
             <div class="col-12 col-lg-8">
                 <div class="single-blog-content mb-100">
-                    {{#if Notexpired}}
+                    {{#if Notpremium}}
+                    {{#each newsS}}
+                    <!-- Post Meta -->
+                    <div class="post-meta">
+                        <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a>
+                        </p>
+                    </div>
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <p style="white-space: pre-line;">{{{Content}}}</p>
+                        {{/each}}
+                        <!-- Post Tags -->
+                        <ul class="post-tags">
+                            {{#each tagS}}
+                            <li><a href="../page/news-search/bytag/{{Tag_Name}}">{{Tag_Name}}</a></li>
+                            {{/each}}
+                        </ul>
+                        {{#each newsS}}
+                        <!-- Post Meta -->
+                        <div class="post-meta second-part">
+                            <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a></p>
+                        </div>
+                        <p class="news-views float-right">Views: {{Views}}</p>
+                    </div>
+                    {{/each}}
+                    {{else}}
                     <h6>Premium news</h6>
-                    {{#each newsS}}
-                    <!-- Post Meta -->
-                    <div class="post-meta">
-                        <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a>
-                        </p>
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <p style="white-space: pre-line;">{{{Content}}}</p>
-                        {{/each}}
-                        <!-- Post Tags -->
-                        <ul class="post-tags">
-                            {{#each tagS}}
-                            <li><a href="../page/news-search/bytag/{{Tag_Name}}">{{Tag_Name}}</a></li>
-                            {{/each}}
-                        </ul>
-                        {{#each newsS}}
-                        <!-- Post Meta -->
-                        <div class="post-meta second-part">
-                            <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a></p>
-                        </div>
-                        <p class="news-views float-right">Views: {{Views}}</p>
-                    </div>
-                    {{/each}}
-                    {{else}}
-                    {{#if NotPRE}}
-                    {{#each newsS}}
-                    <!-- Post Meta -->
-                    <div class="post-meta">
-                        <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a>
-                        </p>
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <p style="white-space: pre-line;">{{{Content}}}</p>
-                        {{/each}}
-                        <!-- Post Tags -->
-                        <ul class="post-tags">
-                            {{#each tagS}}
-                            <li><a href="../page/news-search/bytag/{{Tag_Name}}">{{Tag_Name}}</a></li>
-                            {{/each}}
-                        </ul>
-                        {{#each newsS}}
-                        <!-- Post Meta -->
-                        <div class="post-meta second-part">
-                            <p><a href="#" class="post-author">{{nickname}}</a> on <a class="post-date">{{Date}}</a></p>
-                        </div>
-                        <p class="news-views float-right">Views: {{Views}}</p>
-                    </div>
-                    {{/each}}
-                    {{else}}
-                    <p>Tài khoản của bạn không thể truy cập bài báo này, hãy gia hạn tài khoản của bạn</p>
+                    <p>Bạn phải đăng nhập để truy cập bài báo này</p>
                     {{/if}}
 
-                    {{/if}}
 
                 </div>
             </div>
@@ -89,8 +62,8 @@
                 <div class="post-sidebar-area mb-100">
                     <!-- Widget Area -->
                     <div class="sidebar-widget-area">
-                        <h5 class="title">Summary</h5>
                         {{#each newsS}}
+                        <h5 class="title">Summary</h5>
                         <div class="widget-content">
                             <p>{{Summary}}</p>
                         </div>

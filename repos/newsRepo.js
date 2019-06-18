@@ -288,3 +288,81 @@ exports.LatestTopViewsInCategory = (category) => {
                 limit 1`;
     return db.load(sql);
 }
+
+exports.checkNotPremium = proId => {
+    var sql = `select case when (N.Premium = '0') 
+                then 'true'
+                else 'false'
+                end as bool
+                from news N 
+                where N.news_id = '${proId}'`;
+    return db.load(sql);
+}
+
+exports.SearchFTSPremiumFirst = searchphrase => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
+                from news N, account A
+                where N.Writer_ID = A.account_id and match (Title, Content, Summary) AGAINST ('${searchphrase}' IN NATURAL LANGUAGE MODE)
+                order by N.Premium DESC, N.Date DESC`;
+    return db.load(sql);
+}
+
+exports.SearchSameCategoryWithPaginationPremiumFirst = (categoryname, offset) => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, C.cat_name
+                from news N, sub_category S, category C, account A
+                where C.cat_name = '${categoryname}'
+                and S.parentCategoryId = C.category_id
+                    and N.Subcat_ID = S.id                
+                    and N.Writer_ID = A.account_id
+                order by N.Premium DESC, N.Date DESC
+                limit ${config.Limit}
+                offset ${offset}`;
+    return db.load(sql);
+}
+
+exports.SearchSameSubcatPremiumFirst = subcategoryname => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, S.subcat_name, A.last_name, A.first_name, A.nickname, N.Thumbnail_image
+                from news N, sub_category S, account A
+                where N.Subcat_ID = S.id
+                    and N.Writer_ID = A.account_id
+                    and S.subcat_name = '${subcategoryname}'
+                order by N.Premium DESC, N.Date DESC`;
+    return db.load(sql);
+}
+
+exports.SearchSameTagPremiumFirst = tagname => {
+    var sql = `select N.news_id, N.Title, N.Summary, DATE_FORMAT(N.Date, "%b %e, %Y") AS Date, A.last_name, A.first_name, A.nickname, N.Thumbnail_image, T.Tag_Name
+    from news N, account A, tag T, 
+                            (SELECT N.news_id As NEWS_ID 
+                                FROM news N,
+                                        (SELECT news_id,Tag_ID,
+                                        SUBSTRING_INDEX(Tag_ID, ';', 1) AS tag1,
+                                        SUBSTRING_INDEX(SUBSTRING_INDEX(Tag_ID, ';', 2), ';', -1) AS tag2,
+                                        SUBSTRING_INDEX(SUBSTRING_INDEX(Tag_ID, ';', 3), ';', -1) AS tag3,
+                                        SUBSTRING_INDEX(SUBSTRING_INDEX(Tag_ID, ';', 4), ';', -1) AS tag4
+                                        FROM news ) NT
+                                    WHERE (NT.tag1 = (Select Tag_ID
+                                    From tag
+                                    Where Tag_Name = '${tagname}')
+                                    or NT.tag2 =(Select Tag_ID
+                                        From tag
+                                        Where Tag_Name = '${tagname}')
+                                    or NT.tag3 =(Select Tag_ID
+                                        From tag
+                                        Where Tag_Name = '${tagname}')
+                                    or NT.tag3 =(Select Tag_ID
+                                        From tag
+                                        Where Tag_Name = '${tagname}')) 
+                                    and N.news_id = NT.news_id) TN
+    where N.news_id = TN.NEWS_ID 
+          and N.Writer_ID = A.account_id
+          and T.Tag_Name = '${tagname}'
+    order by N.Premium DESC, N.Date DESC`;
+    return db.load(sql);
+}
+
+exports.LoadTagList = () => {
+    var sql = `select *
+                from tag`;
+    return db.load(sql);
+}
