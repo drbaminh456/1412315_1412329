@@ -503,6 +503,7 @@ router.post('/', (req, res) => {
   accountRepo.login(user).then(rows => {
     if (rows.length > 0) {
       if (rows[0].account_type === 'administrator') {
+        
         var vm = {
           isAdmin: true,
           layout: 'log.handlebars'
@@ -514,7 +515,19 @@ router.post('/', (req, res) => {
         req.session.lastname = rows[0].last_name;
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
-        res.render('log/admin', vm);
+        
+        var t1 = newsRepo.LoadTagList();
+        Promise.all([t1]).then(([tag]) => {
+          //vm.news = newS;
+          var vm = {
+            name: req.body.email,
+            TagS: tag,
+            layout: 'log.handlebars'
+          }
+          res.render('log/admin', vm);
+        });
+
+        //res.render('log/admin', vm);
       } else if (rows[0].account_type === 'subscriber') {
         var vm = {
           name: req.body.email,
@@ -541,7 +554,6 @@ router.post('/', (req, res) => {
           id: req.session.idAccount
         }
         var t1 = accountRepo.loadNews(tempObj);
-
 
         Promise.all([t1]).then(([newS]) => {
           //vm.news = newS;
