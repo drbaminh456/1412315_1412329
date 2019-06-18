@@ -23,8 +23,11 @@ exports.changeInformation = obj => {
 }
 exports.loadAll = obj => {
     var sql = `select * from account where account_id = '${obj.id}'`;
-    console.log(obj);
-    
+    return db.load(sql);
+}
+exports.loadNews = obj => {
+    var sql = `select * from news where Writer_ID = '${obj.id}' ORDER BY Status`;
+    console.log(sql);
     return db.load(sql);
 }
 
