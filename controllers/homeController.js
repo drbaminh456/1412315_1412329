@@ -6,8 +6,7 @@ var SHA256 = require('crypto-js/sha256');
 var config = require('../config/config')
 
 function formatDate(date) {
-  console.log(typeof(date));
-   
+
   var monthNames = [
     "01", "02", "03",
     "06", "05", "06", "07",
@@ -15,6 +14,7 @@ function formatDate(date) {
     "11", "12"
   ];
   if (date != null) {
+
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
@@ -72,7 +72,7 @@ router.get('/', (req, res) => {
   var te1 = newsRepo.LatestTopViewsInCategory('Thể thao');
   var tf1 = newsRepo.LatestTopViewsInCategory('Giáo dục');
 
-  Promise.all([t1,t2, t3, t4, ta, tb, tc, td, te, tf, ta1, tb1, tc1, td1, te1, tf1]).then(([ranSto, topSto, top3, allLatest, kinhDoanh2, theGioi2, VHXH2, doiSong2, theThao2, giaoDuc2, kinhDoanh1, theGioi1, VHXH1, doiSong1, theThao1, giaoDuc1]) => {
+  Promise.all([t1, t2, t3, t4, ta, tb, tc, td, te, tf, ta1, tb1, tc1, td1, te1, tf1]).then(([ranSto, topSto, top3, allLatest, kinhDoanh2, theGioi2, VHXH2, doiSong2, theThao2, giaoDuc2, kinhDoanh1, theGioi1, VHXH1, doiSong1, theThao1, giaoDuc1]) => {
     var vm = {
       ranStoS: ranSto,
       topStoS: topSto,
@@ -81,21 +81,21 @@ router.get('/', (req, res) => {
       kinhDoanh2S: kinhDoanh2,
       theGioi2S: theGioi2,
       VHXH2S: VHXH2,
-      doiSong2S:doiSong2,
+      doiSong2S: doiSong2,
       theThao2S: theThao2,
       giaoDuc2S: giaoDuc2,
       kinhDoanh1S: kinhDoanh1,
       theGioi1S: theGioi1,
       VHXH1S: VHXH1,
-      doiSong1S:doiSong1,
+      doiSong1S: doiSong1,
       theThao1S: theThao1,
       giaoDuc1S: giaoDuc1,
       layout: 'main.handlebars'
     };
-    
+
     res.render('home/home', vm);
   })
-  
+
 });
 
 
