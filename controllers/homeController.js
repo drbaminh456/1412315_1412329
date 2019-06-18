@@ -332,6 +332,7 @@ router.post('/', (req, res) => {
       } else if (rows[0].account_type === 'writer') {
         var vm = {
           name: req.body.email,
+          news: [],
           layout: 'log.handlebars'
         }
         req.session.isLogged = true;
@@ -342,6 +343,17 @@ router.post('/', (req, res) => {
         req.session.birthDate = formatDate(rows[0].birthdate);
         req.session.role = rows[0].account_type;
         req.session.nickname = rows[0].nickname;
+        var tempObj = {
+          id: req.session.idAccount
+        }
+        var t1 = accountRepo.loadNews(tempObj);
+        console.log(t1);
+        
+        Promise.all([t1]).then(([newS]) => {
+          vm.news = newS;
+        });
+        console.log(vm);
+        
         res.render('log/writer', vm);
       }
     } else {

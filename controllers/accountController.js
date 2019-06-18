@@ -130,14 +130,12 @@ router.post('/change-infor', (req, res) => {
     nickname: req.body.nickname
   };
   accountRepo.changeInformation(obj);
-  // accountRepo.loadAll(obj).then(rows => {
-  //   console.log(rows[0]);
-    
-  //   var vm = {
-  //     layout: 'log.handlebars'
-  //   };
-  //   res.render('log/my-profile', vm);
-  // });
+  accountRepo.loadAll(obj).then(rows => {
+    var vm = {
+      layout: 'log.handlebars'
+    };
+    res.render('log/my-profile', vm);
+  });
 
 });
 module.exports = router;
