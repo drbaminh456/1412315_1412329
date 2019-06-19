@@ -1,0 +1,5 @@
+Cài đặt wampserver để chạy database.
+Username: root
+Password: ''
+Check out project từ https://github.com/drbaminh456/1412315_1412329
+npm i project ở visual code để chạy trên port 3000.
